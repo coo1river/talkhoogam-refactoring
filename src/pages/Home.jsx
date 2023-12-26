@@ -172,8 +172,12 @@ export default function Home() {
 export const FeedWrap = styled.div`
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   flex-direction: column;
+  max-width: 390px;
+
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+  }
 
   & .symbol-logo {
     margin-top: 220px;

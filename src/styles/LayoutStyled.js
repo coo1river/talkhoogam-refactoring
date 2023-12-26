@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 export const LayoutStyle = styled.section`
-  min-width: 390px;
-  /* height: 100vh; */
   margin: 0 auto;
   min-height: 800px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   /* 내부 스크롤 안보이게 처리 */
   /* overflow: scroll;
     &::-webkit-scrollbar{

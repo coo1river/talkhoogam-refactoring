@@ -134,14 +134,24 @@ export default Footer;
 
 const FooterLayout = styled.footer`
   border-top: 2px solid #dddcdc8c;
-  max-width: 390px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
   position: fixed;
   bottom: 0;
   background-color: white;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    left: 0px;
+    width: 20%;
+    height: calc(100vh - 55px);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    font-size: 0px;
+  }
 `;
 
 const FooterIconWrap = styled.button`
@@ -151,7 +161,7 @@ const FooterIconWrap = styled.button`
   flex-direction: column;
 
   cursor: pointer;
-  width: 84px;
+  width: 100%;
   height: 60px;
 
   & p {

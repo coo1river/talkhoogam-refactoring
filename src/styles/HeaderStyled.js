@@ -3,7 +3,8 @@ import styled from "styled-components";
 import Btn from "../components/common/button/Button";
 
 export const HeaderMain = styled.header`
-  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
   min-height: 54px;
   padding: 0 15px;
   text-align: center;
