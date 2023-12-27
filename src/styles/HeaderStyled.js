@@ -5,15 +5,14 @@ import Btn from "../components/common/button/Button";
 export const HeaderMain = styled.header`
   width: 100%;
   box-sizing: border-box;
-  min-height: 54px;
-  padding: 0 15px;
+  height: 54px;
+  padding: 0 30px;
   text-align: center;
   border-bottom: 2px solid #dddcdc8c;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
 
   & h2 {
     font-size: 18px;
@@ -46,8 +45,12 @@ export const MenuBtn = styled.button`
 `;
 
 export const SearchBtn = styled.button`
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
+
+  @media screen and (min-width: 768px) {
+    visibility: hidden;
+  }
 `;
 
 export const LogoImg = styled.img`

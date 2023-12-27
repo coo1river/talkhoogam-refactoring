@@ -8,6 +8,7 @@ import { ReactComponent as IconEdit } from "../../assets/icons/edit.svg";
 import { ReactComponent as IconusersAlt } from "../../assets/icons/users-alt.svg";
 import { ReactComponent as IconUser } from "../../assets/icons/user.svg";
 import { ReactComponent as IconBotBar } from "../../assets/icons/minus.svg";
+import { ReactComponent as IconSearch } from "../../assets/icons/search.svg";
 import accountname from "../../recoil/accountname";
 import { useRecoilValue } from "recoil";
 
@@ -68,6 +69,22 @@ function Footer() {
         </FooterIconWrap>
 
         <FooterIconWrap
+          className="search"
+          onClick={() => {
+            handleClickState("search");
+          }}
+        >
+          <IconSearch
+            className="footer-icon"
+            fill={svgColor === `/search` ? "#56b778" : "#979797"}
+          />
+          <IconBotBar
+            className={selectMenu === "/search" ? "bot-bar" : "bot-bar-hidden"}
+            fill="#56b778"
+          />
+        </FooterIconWrap>
+
+        <FooterIconWrap
           onClick={() => {
             handleClickState("gathering");
           }}
@@ -91,7 +108,7 @@ function Footer() {
 
         <FooterIconWrap onClick={showModal}>
           <IconEdit
-            className="footer-icon"
+            className="footer-icon edit-icon"
             fill={svgColor === "/productadd" ? "#56b778" : "#979797"}
           />
           <p
@@ -180,7 +197,13 @@ const FooterLayout = styled.footer`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 20px;
+    gap: 5px;
+  }
+
+  & .search {
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 `;
 
@@ -214,14 +237,30 @@ const FooterIconWrap = styled.button`
     height: 22px;
   }
 
+  & .edit-icon {
+    margin-bottom: 22px;
+
+    @media screen and (max-width: 768px) {
+      margin: 0;
+    }
+  }
+
   & .bot-bar {
     width: 22px;
     height: 22px;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   & .bot-bar-hidden {
     width: 22px;
     height: 22px;
     visibility: hidden;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 `;

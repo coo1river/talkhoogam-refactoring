@@ -172,11 +172,7 @@ export const FeedWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  max-width: 390px;
-
-  @media (min-width: 1024px) {
-    max-width: 1024px;
-  }
+  width: 100%;
 
   & .symbol-logo {
     margin-top: 220px;

@@ -24,4 +24,12 @@ export const LayoutInsideStyle = styled.div`
   /* 내부 콘텐츠가 높이가 작을 때  */
   margin-bottom: 50px;
   /* height: 100%; */
+
+  @media screen and (max-width: 768px) {
+    max-width: 390px;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 550px;
+  }
 `;
