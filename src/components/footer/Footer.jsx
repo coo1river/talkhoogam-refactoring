@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PostInsertModal from "../modal/PostInsertModal";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { ReactComponent as IconChat } from "../../assets/icons/messages.svg";
 import { ReactComponent as IconEdit } from "../../assets/icons/edit.svg";
 import { ReactComponent as IconusersAlt } from "../../assets/icons/users-alt.svg";
 import { ReactComponent as IconUser } from "../../assets/icons/user.svg";
+import { ReactComponent as IconBotBar } from "../../assets/icons/minus.svg";
 import accountname from "../../recoil/accountname";
 import { useRecoilValue } from "recoil";
 
@@ -15,6 +16,9 @@ function Footer() {
   const uselocation = useLocation();
   const [svgColor, setSvgColor] = useState(uselocation.pathname.toLowerCase());
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectMenu, setSelectMenu] = useState(
+    uselocation.pathname.toLowerCase()
+  );
   const accountName = useRecoilValue(accountname);
 
   const showModal = () => {
@@ -24,19 +28,23 @@ function Footer() {
   const handleClickState = (pageName) => {
     navigate(`/${pageName}`);
     setSvgColor(pageName);
+    setSelectMenu(pageName);
+    console.log(selectMenu);
 
-    // console.log(`페이지 이름 : /${pageName}`);
     if (`/${pageName}` === "/home") {
       setSvgColor(`/${pageName}`);
     } else if (`/${pageName}` === `/profile/${accountName}`) {
       setSvgColor(`/${pageName}`);
-      // window.location.reload(); // 페이지 새로 고침
     } else if (`/${pageName}` === "/chat") {
       setSvgColor(`/${pageName}`);
     } else if (`/${pageName}` === "/gathering") {
       setSvgColor(`/${pageName}`);
     }
   };
+
+  useEffect(() => {
+    console.log("selectMenu changed:", selectMenu);
+  }, [selectMenu]);
 
   return (
     <>
@@ -53,6 +61,10 @@ function Footer() {
           <p style={{ color: svgColor === "/home" ? "#56b778" : "#767676" }}>
             홈
           </p>
+          <IconBotBar
+            className={selectMenu === "/home" ? "bot-bar" : "bot-bar-hidden"}
+            fill="#56b778"
+          />
         </FooterIconWrap>
 
         <FooterIconWrap
@@ -69,6 +81,12 @@ function Footer() {
           >
             독서 모임
           </p>
+          <IconBotBar
+            className={
+              selectMenu === "/gathering" ? "bot-bar" : "bot-bar-hidden"
+            }
+            fill="#56b778"
+          />
         </FooterIconWrap>
 
         <FooterIconWrap onClick={showModal}>
@@ -92,13 +110,15 @@ function Footer() {
         >
           <IconChat
             className="footer-icon"
-            // fill="#fff"
-            // stroke={svgColor === "/chat" ? "#56b778" : "#767676"}
             fill={svgColor === `/chat` ? "#56b778" : "#979797"}
           />
           <p style={{ color: svgColor === "/chat" ? "#56b778" : "#767676" }}>
             채팅
           </p>
+          <IconBotBar
+            className={selectMenu === "/chat" ? "bot-bar" : "bot-bar-hidden"}
+            fill="#56b778"
+          />
         </FooterIconWrap>
 
         <FooterIconWrap
@@ -120,6 +140,14 @@ function Footer() {
           >
             프로필
           </p>
+          <IconBotBar
+            className={
+              selectMenu === `/profile/${accountName}`
+                ? "bot-bar"
+                : "bot-bar-hidden"
+            }
+            fill="#56b778"
+          />
         </FooterIconWrap>
 
         {modalOpen && (
@@ -143,14 +171,16 @@ const FooterLayout = styled.footer`
   width: 100%;
 
   @media screen and (min-width: 768px) {
+    border-top: none;
+    border-right: 2px solid #dddcdc8c;
+
     left: 0px;
-    width: 20%;
+    width: 160px;
     height: calc(100vh - 55px);
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 30px;
-    font-size: 0px;
+    gap: 20px;
   }
 `;
 
@@ -164,15 +194,34 @@ const FooterIconWrap = styled.button`
   width: 100%;
   height: 60px;
 
+  @media screen and (min-width: 768px) {
+    margin-top: 20px;
+  }
+
   & p {
     margin-top: 4px;
     text-align: center;
     font-size: 10px;
     font-family: "Pretendard", sans-serif;
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
   }
 
   & .footer-icon {
     width: 22px;
     height: 22px;
+  }
+
+  & .bot-bar {
+    width: 22px;
+    height: 22px;
+  }
+
+  & .bot-bar-hidden {
+    width: 22px;
+    height: 22px;
+    visibility: hidden;
   }
 `;

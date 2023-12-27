@@ -31,7 +31,6 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
 
     fetchData(); // 데이터 가져오는 함수를 호출
   }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 호출
-  console.log(feedData);
 
   function moveProfile(accountname) {
     navigate(`/profile/${accountname}`);
