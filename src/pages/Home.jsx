@@ -172,7 +172,12 @@ export const FeedWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
+
+  @media screen and (min-width: 768px) {
+    margin: 0 50px;
+  }
 
   & .symbol-logo {
     margin-top: 220px;
@@ -200,7 +205,15 @@ export const FeedWrap = styled.div`
   }
 
   .user-contents {
-    width: 304px;
+    width: 100%;
+
+    @media screen and (min-width: 390px) {
+      width: 350px;
+    }
+
+    @media screen and (min-width: 768px) {
+      width: 500px;
+    }
   }
 
   .timeline-title-wrap {
@@ -245,10 +258,14 @@ export const FeedWrap = styled.div`
   }
 
   .timelin-img {
-    width: 304px;
+    width: 100%;
     height: 228px;
     border-radius: 10px;
     object-fit: contain;
+
+    @media screen and (min-width: 768px) {
+      max-width: 400px;
+    }
   }
 
   .social-wrap {
@@ -274,11 +291,6 @@ export const FeedWrap = styled.div`
     align-items: center;
     justify-content: center;
   }
-
-  /* .social-wrap div::after {
-      margin-left: 6px;
-      content: "55";
-  } */
 
   .wr-date {
     color: #767676;

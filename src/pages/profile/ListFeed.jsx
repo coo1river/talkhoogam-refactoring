@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Modal from "react-modal";
 import styled from "styled-components";
 import ImgVertical from "../../assets/icons/s-icon-more-vertical.svg";
 import IconHeart from "../../assets/icons/heart.svg";
@@ -8,7 +7,6 @@ import IconHeartActive from "../../assets/icons/heart-avtive.svg";
 import IconMessage from "../../assets/icons/icon-message-circle.svg";
 import MyFeedListAPI from "../../api/post/MyFeedListAPI.jsx";
 import accountName from "../../recoil/accountname";
-import Empty from "../../components/empty/Empty";
 import LogoImg from "../../assets/images/Logo.png";
 import CommonModal from "../../components/modal/CommonModal";
 import { useRecoilValue } from "recoil";
@@ -65,14 +63,15 @@ export default function ListFeed(accountname) {
     <UlStyled>
       {loading && myFeedData.post.length === 0 ? (
         <>
-        <h1 className="a11y-hidden">게시글이 존재하지 않습니다.</h1>
-        <div className="noneFeed">        
-        <img src={LogoImg}></img>
-        게시글이 존재하지 않습니다.
-        </div>
-      </>
+          <h1 className="a11y-hidden">게시글이 존재하지 않습니다.</h1>
+          <div className="noneFeed">
+            <img src={LogoImg}></img>
+            게시글이 존재하지 않습니다.
+          </div>
+        </>
       ) : (
-        loading && myFeedData.post.map((item, index) => {
+        loading &&
+        myFeedData.post.map((item, index) => {
           const bookData = {
             bookTitle: "",
             bookAuthor: "",
@@ -244,7 +243,7 @@ const UlStyled = styled.ul`
     left: 50%;
     margin-bottom: 90px;
     transform: translate(-50%, -50%);
-  };
+  }
   .noneFeed img {
     width: 110px;
     display: block;

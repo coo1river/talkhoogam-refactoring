@@ -5,6 +5,11 @@ export const SearchList = styled.article`
   display: flex;
   gap: 10px;
   cursor: pointer;
+  align-self: start;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 195px;
+  }
 
   & .search-keyword {
     display: flex;

@@ -66,7 +66,6 @@ export const ScrollHandler = styled.button`
 `;
 
 export const MyProductUl = styled.ul`
-  max-width: 390px;
   height: 160px;
 
   display: flex;

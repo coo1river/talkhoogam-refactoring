@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { LayoutStyle } from "../styles/LayoutStyled";
+import { LayoutInsideStyle, LayoutStyle } from "../styles/LayoutStyled";
 import { BackBtn, HeaderMain } from "../styles/HeaderStyled";
 import iconArrow from "../assets/icons/icon-arrow-left.svg";
 import { useRecoilValue } from "recoil";
@@ -8,6 +8,7 @@ import SearchApi from "../api/SearchApi";
 import { SearchList } from "../styles/SearchStyled";
 import profile from "../assets/images/img-profile.png";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/footer/Footer";
 
 export default function Search() {
   const [searchData, setSearchData] = useState([]);
@@ -34,7 +35,6 @@ export default function Search() {
     window.history.back();
   }
 
-
   // 딜레이 함수
   function useDebounce(value, delay = 500) {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -52,8 +52,7 @@ export default function Search() {
   // 딜레이 함수를 searchResult라는 변수에 할당
   const searchResult = useDebounce(searchId);
 
-
-  // useEffect를 통해 searchResult가 변경되는 경우 
+  // useEffect를 통해 searchResult가 변경되는 경우
   useEffect(() => {
     const setResult = async () => {
       if (searchResult) {
@@ -110,6 +109,7 @@ export default function Search() {
         />
       </HeaderMain>
       {searchId ? <SearchResult /> : null}
+      <Footer />
     </LayoutStyle>
   );
 }

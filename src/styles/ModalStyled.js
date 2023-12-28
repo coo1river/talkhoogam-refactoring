@@ -12,7 +12,7 @@ const fadeInUp = keyframes`
 `;
 
 export const ModalLayout = styled.div`
-  width: 390px;
+  width: 100%;
   border: 1px solid var(--color-lightgrey);
   position: fixed;
   bottom: 0;

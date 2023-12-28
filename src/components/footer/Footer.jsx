@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PostInsertModal from "../modal/PostInsertModal";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { ReactComponent as IconusersAlt } from "../../assets/icons/users-alt.svg
 import { ReactComponent as IconUser } from "../../assets/icons/user.svg";
 import { ReactComponent as IconBotBar } from "../../assets/icons/minus.svg";
 import { ReactComponent as IconSearch } from "../../assets/icons/search.svg";
+import LogoImg from "../../assets/images/Logo.png";
 import accountname from "../../recoil/accountname";
 import { useRecoilValue } from "recoil";
 
@@ -28,9 +29,7 @@ function Footer() {
 
   const handleClickState = (pageName) => {
     navigate(`/${pageName}`);
-    setSvgColor(pageName);
-    setSelectMenu(pageName);
-    console.log(selectMenu);
+    setSelectMenu(`/${pageName}`);
 
     if (`/${pageName}` === "/home") {
       setSvgColor(`/${pageName}`);
@@ -43,13 +42,10 @@ function Footer() {
     }
   };
 
-  useEffect(() => {
-    console.log("selectMenu changed:", selectMenu);
-  }, [selectMenu]);
-
   return (
     <>
       <FooterLayout>
+        <img src={LogoImg} alt="로고 이미지" className="img-logo" />
         <FooterIconWrap
           onClick={() => {
             handleClickState("home");
@@ -177,7 +173,7 @@ function Footer() {
 
 export default Footer;
 
-const FooterLayout = styled.footer`
+export const FooterLayout = styled.footer`
   border-top: 2px solid #dddcdc8c;
   display: flex;
   align-items: center;
@@ -186,6 +182,7 @@ const FooterLayout = styled.footer`
   bottom: 0;
   background-color: white;
   width: 100%;
+  z-index: 500;
 
   @media screen and (min-width: 768px) {
     border-top: none;
@@ -193,11 +190,23 @@ const FooterLayout = styled.footer`
 
     left: 0px;
     width: 160px;
-    height: calc(100vh - 55px);
+    height: 100%;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    box-sizing: border-box;
     gap: 5px;
+  }
+
+  & .img-logo {
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+      margin: 30px auto;
+      width: 38px;
+      height: 38px;
+    }
   }
 
   & .search {
@@ -207,7 +216,7 @@ const FooterLayout = styled.footer`
   }
 `;
 
-const FooterIconWrap = styled.button`
+export const FooterIconWrap = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
