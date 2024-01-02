@@ -92,7 +92,6 @@ export default function MoreList({ setMoreOpen }) {
 
   return (
     <>
-      <Backdrop onClick={closeMore} />
       {showLogout ? (
         <ModalLogoutStyled>
           <h2 className="a11y-hidden">로그아웃</h2>

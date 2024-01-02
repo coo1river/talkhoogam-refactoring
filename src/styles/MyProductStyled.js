@@ -70,7 +70,11 @@ export const ScrollHandler = styled.button`
 `;
 
 export const MyProductUl = styled.ul`
-  height: 160px;
+  height: 170px;
+
+  @media screen and (min-width: 768px) {
+    height: 190px;
+  }
 
   display: flex;
   gap: 10px;
@@ -102,11 +106,17 @@ export const MyProductLi = styled.li`
   }
 
   & .img-my-product {
-    object-fit: contain;
-    width: 100px;
-    height: 100px;
+    object-fit: cover;
+    width: 80px;
+    height: 110px;
     margin: 10px auto;
     display: block;
+    border-radius: 5px;
+
+    @media screen and (min-width: 768px) {
+      width: 100px;
+      height: 130px;
+    }
   }
 
   & .product-tit {

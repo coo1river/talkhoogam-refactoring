@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CommentLayout = styled.section`
   border-top: 1px solid var(--color-lightgrey);
-  width: 358px;
+  width: 100%;
   padding: 20px 0 16px 0;
 
   .info-wrap {
@@ -66,7 +66,7 @@ export const CommentLayout = styled.section`
 `;
 
 export const CommentForm = styled.form`
-  width: 100%;
+  width: 600px;
   height: 60px;
   background-color: white;
   display: flex;
@@ -74,9 +74,7 @@ export const CommentForm = styled.form`
   position: fixed;
   bottom: 0;
   border-top: 1px solid var(--color-lightgrey);
-  /* justify-content: space-between; */
   gap: 15px;
-  /* color: var(--color-maingrey); */
   font-size: 14px;
   font-weight: 400;
 
@@ -84,7 +82,6 @@ export const CommentForm = styled.form`
     width: 36px;
     height: 36px;
     border-radius: 36px;
-    margin-left: 16px;
   }
 
   .commnt-btn {

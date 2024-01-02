@@ -12,23 +12,14 @@ const fadeInUp = keyframes`
 `;
 
 export const ModalLayout = styled.div`
-  width: 100%;
+  width: 350px;
   border: 1px solid var(--color-lightgrey);
   position: fixed;
   bottom: 0;
   border-radius: 10px 10px 0 0;
   background-color: white;
-  z-index: 200;
-  /* @keyframes fadeInUp {
-        0%{
-            opacity: 0;
-            transform: translate3d(0, 100%, 0);
-        }
-        to{
-            opacity: 1;
-            transform: translateZ(0);
-        }
-    } */
+  z-index: 900;
+
   animation: ${fadeInUp} 0.6s;
 
   ${(props) =>
@@ -36,6 +27,10 @@ export const ModalLayout = styled.div`
     css`
       animation: ${fadeInUp} 1s;
     `};
+
+  @media screen and (min-width: 768px) {
+    width: 600px;
+  }
 `;
 
 export const ModalHeader = styled.div`
@@ -61,7 +56,6 @@ export const ModalHeader = styled.div`
 `;
 
 export const ModalInsideLayout = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

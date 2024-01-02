@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import {
   BackBtn,
+  Backdrop,
+  ModalBackground,
   HeaderMain,
   LogoImg,
   MenuBtn,
@@ -31,6 +33,11 @@ export default function MainHeader({ pageName }) {
 
   return (
     <>
+      {moreOpen && (
+        <ModalBackground open={moreOpen} onClick={() => setMoreOpen(false)}>
+          {moreOpen && <MoreList setMoreOpen={setMoreOpen} />}
+        </ModalBackground>
+      )}
       <HeaderMain>
         {location.pathname === "/home" ||
         location.pathname === "/gathering" ||
@@ -61,7 +68,6 @@ export default function MainHeader({ pageName }) {
           </MenuBtn>
         )}
       </HeaderMain>
-      {moreOpen && <MoreList setMoreOpen={setMoreOpen} />}
     </>
   );
 }

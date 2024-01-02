@@ -111,7 +111,7 @@ export default function Profile() {
   return (
     <>
       <LayoutStyle>
-        <BasicHeader></BasicHeader>
+        <BasicHeader />
         <ProfilePage>
           <ProfileMain>
             <ProfileHead>

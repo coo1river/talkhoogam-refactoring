@@ -14,6 +14,7 @@ import CommentInput from "../../components/comment/CommentInput";
 import timeFormat from "../../utils/timeFormat";
 import LikeHeart from "../../components/common/LikeHeart";
 import { ClipLoader } from "react-spinners";
+import Footer, { FooterLayout } from "../../components/footer/Footer";
 
 export default function PostDetail() {
   const params = useParams();
@@ -187,20 +188,29 @@ export default function PostDetail() {
           isLocation={handleIsLocation}
           showModalInComment={showModalInComment} // 넘겨줄 콜백 함수 추가
         ></Comment>
+        <CommentInput id={params.id}></CommentInput>
+        {modalOpen && (
+          <CommonModal
+            isMine={isMine}
+            id={idState}
+            setModalOpen={setModalOpen}
+            isLocation={isLocation}
+            postId={postDetail.id}
+          />
+        )}
       </LayoutInsideStyle>
-      {modalOpen && (
-        <CommonModal
-          isMine={isMine}
-          id={idState}
-          setModalOpen={setModalOpen}
-          isLocation={isLocation}
-          postId={postDetail.id}
-        ></CommonModal>
-      )}
-      <CommentInput id={params.id}></CommentInput>
+      <PostDetailFooter>
+        <Footer />
+      </PostDetailFooter>
     </LayoutStyle>
   );
 }
+
+export const PostDetailFooter = styled(FooterLayout)`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
 
 export const PostDetailWrap = styled.div`
   display: flex;
@@ -233,7 +243,7 @@ export const PostDetailWrap = styled.div`
   }
 
   .user-contents {
-    width: 304px;
+    width: 100%;
   }
 
   .timeline-title-wrap {

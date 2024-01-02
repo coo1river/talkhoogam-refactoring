@@ -67,6 +67,7 @@ export default function ChatDetail() {
           전송
         </button>
       </CommentForm>
+      <Footer />
     </LayoutStyle>
   );
 }

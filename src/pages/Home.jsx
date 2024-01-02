@@ -161,9 +161,9 @@ export default function Home() {
           setFeedData={setFeedData}
           showModal={showModal}
         />
+        {modalOpen && <CommonModal setModalOpen={setModalOpen}></CommonModal>}
       </LayoutInsideStyle>
       <Footer />
-      {modalOpen && <CommonModal setModalOpen={setModalOpen}></CommonModal>}
     </LayoutStyle>
   );
 }
@@ -208,7 +208,7 @@ export const FeedWrap = styled.div`
     width: 100%;
 
     @media screen and (min-width: 390px) {
-      width: 350px;
+      width: 300px;
     }
 
     @media screen and (min-width: 768px) {

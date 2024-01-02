@@ -7,10 +7,6 @@ export const SearchList = styled.article`
   cursor: pointer;
   align-self: start;
 
-  @media screen and (min-width: 768px) {
-    margin-left: 35px;
-  }
-
   & .search-keyword {
     display: flex;
     flex-direction: column;
@@ -39,5 +35,4 @@ export const SearchInput = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
 `;

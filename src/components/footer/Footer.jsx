@@ -163,9 +163,7 @@ function Footer() {
           />
         </FooterIconWrap>
 
-        {modalOpen && (
-          <PostInsertModal setModalOpen={setModalOpen}></PostInsertModal>
-        )}
+        {modalOpen && <PostInsertModal setModalOpen={setModalOpen} />}
       </FooterLayout>
     </>
   );

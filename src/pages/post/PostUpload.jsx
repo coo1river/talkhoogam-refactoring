@@ -12,6 +12,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { author, link, thumbnail, title } from "../../recoil/bookInfo";
 import bookImg from "../../assets/images/book.png";
 import UploadModal from "../../components/modal/UploadModal";
+import Footer from "../../components/footer/Footer";
 
 export default function PostUpload() {
   const [imgSrc, setImgSrc] = useState("");
@@ -106,6 +107,19 @@ export default function PostUpload() {
     setOpenModal(false);
   };
 
+  // 모달 창 열렸을 때 배경 어둡게
+  const ModalBackground = styled.div`
+    width: 100%;
+    height: 100%;
+    display: ${({ open }) => (open ? "flex" : "none")};
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+  `;
+
   const handleUpload = () => {
     // 클릭 시 파일 입력(input) 엘리먼트를 트리거합니다.
     if (inputImage.current) {
@@ -129,82 +143,86 @@ export default function PostUpload() {
   };
 
   return (
-    <LayoutStyle>
-      <h1 className="a11y-hidden">피드 등록 페이지</h1>
-      <UploadHeader onClickHandler={onClickHandler}>저장</UploadHeader>
-      <LayoutInsideStyle>
-        <PositionWrap>
-          <ContentWrap>
-            {profileInfo ? (
-              <>
-                <img
-                  className="profile-img"
-                  src={profileInfo.image}
-                  alt="프로필이미지"
-                />
-                <InputWrap>
-                  {imgSrc && !bookThumb && (
-                    <img
-                      src={imgSrc}
-                      alt="업로드 이미지"
-                      onClick={(e) => navigate("/searchbook")}
-                    />
-                  )}
-
-                  {/* 모달 창 */}
-                  {openModal && (
-                    <UploadModal onClickHandler={handleModalClose}>
-                      <li onClick={() => handleModalClose("searchBook")}>
-                        책 검색
-                      </li>
-                      <li onClick={handleUpload}>
-                        이미지 업로드
-                        <input
-                          id="file-upload"
-                          onChange={(e) => handleChangeImage(e)}
-                          type="file"
-                          accept="image/*"
-                          ref={inputImage}
-                          style={{ display: openModal ? "none" : "block" }}
-                        />
-                      </li>
-                    </UploadModal>
-                  )}
-                  {/* 책 정보 */}
-                  {bookThumb ? <BookInfo /> : null}
-                  {itemImage || bookThumb ? null : (
-                    <SearchBook onClick={(e) => setOpenModal(true)} />
-                  )}
-                  <TextArea
-                    className="book-report"
-                    placeholder="책 후기를 남겨주세요."
-                    ref={textareaRef}
-                    onChange={(event) => {
-                      hendleResizeHeight();
-                      setInputContent(event.target.value);
-                    }}
+    <>
+      <ModalBackground open={openModal} onClick={handleModalClose}>
+        {/* 이미지 클릭 시 모달 창 */}
+        {openModal && (
+          <UploadModal onClickHandler={handleModalClose}>
+            <li onClick={() => handleModalClose("searchBook")}>책 검색</li>
+            <li onClick={handleUpload}>
+              이미지 업로드
+              <input
+                id="file-upload"
+                onChange={(e) => handleChangeImage(e)}
+                type="file"
+                accept="image/*"
+                ref={inputImage}
+                style={{ display: openModal ? "none" : "block" }}
+              />
+            </li>
+          </UploadModal>
+        )}
+      </ModalBackground>
+      <LayoutStyle>
+        <h1 className="a11y-hidden">피드 등록 페이지</h1>
+        <UploadHeader onClickHandler={onClickHandler}>저장</UploadHeader>
+        <LayoutInsideStyle>
+          <PositionWrap>
+            <ContentWrap>
+              {profileInfo ? (
+                <>
+                  <img
+                    className="profile-img"
+                    src={profileInfo.image}
+                    alt="프로필이미지"
                   />
-                </InputWrap>
-              </>
-            ) : (
-              <p>로딩 중 ..</p>
-            )}
-          </ContentWrap>
-        </PositionWrap>
-      </LayoutInsideStyle>
-    </LayoutStyle>
+                  <InputWrap>
+                    {imgSrc && !bookThumb && (
+                      <img
+                        src={imgSrc}
+                        alt="업로드 이미지"
+                        onClick={(e) => navigate("/searchbook")}
+                      />
+                    )}
+
+                    {/* 책 정보 */}
+                    {bookThumb ? <BookInfo /> : null}
+                    {itemImage || bookThumb ? null : (
+                      <SearchBook onClick={(e) => setOpenModal(true)} />
+                    )}
+                    <TextArea
+                      className="book-report"
+                      placeholder="책 후기를 남겨주세요."
+                      ref={textareaRef}
+                      onChange={(event) => {
+                        hendleResizeHeight();
+                        setInputContent(event.target.value);
+                      }}
+                    />
+                  </InputWrap>
+                </>
+              ) : (
+                <p>로딩 중 ..</p>
+              )}
+            </ContentWrap>
+          </PositionWrap>
+        </LayoutInsideStyle>
+        <Footer />
+      </LayoutStyle>
+    </>
   );
 }
 
 const PositionWrap = styled.div`
   position: relative;
   min-height: 500px;
+  margin: 0 20px;
 `;
 
 const ContentWrap = styled.div`
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
+  justify-content: center;
 
   /* position: relative; */
   .profile-img {
@@ -212,33 +230,42 @@ const ContentWrap = styled.div`
     height: 42px;
     border-radius: 42px;
     object-fit: cover;
+    @media screen and (min-width: 768px) {
+      width: 50px;
+      height: 50px;
+    }
   }
 
   .book-report {
     font-size: 15px;
     box-sizing: border-box;
     font-family: "Pretendard", sans-serif;
+
+    @media screen and (min-width: 768px) {
+      font-size: 17px;
+    }
   }
 `;
 
 const SearchBook = styled.div`
-  margin-bottom: 10px;
-  width: 300px;
-  border-radius: 20px;
   height: 200px;
+  margin: 0 20px;
+  border-radius: 20px;
   background-color: var(--color-trans-grey);
   border: 2px solid #e7e7e7;
   cursor: pointer;
-
   background-image: url(${bookImg});
   background-size: 60px;
   background-repeat: no-repeat;
   background-position: center center;
+
+  @media screen and (min-width: 768px) {
+    height: 300px;
+  }
 `;
 
 const InputWrap = styled.div`
-  width: 304px;
-
+  width: 100%;
   img {
     display: block;
     margin: 0 auto;
@@ -246,8 +273,11 @@ const InputWrap = styled.div`
     height: 200px;
     border-radius: 5px;
     object-fit: contain;
-
     cursor: pointer;
+
+    @media screen and (min-width: 768px) {
+      height: 300px;
+    }
   }
 `;
 
@@ -255,20 +285,28 @@ const Book = styled.div`
   line-height: 1.3rem;
 
   & .book-title {
-    margin: 5px 0;
+    margin: 10px 0;
     display: block;
     font-size: 18px;
     font-weight: bold;
+
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   & .book-author {
     color: #474646;
     font-size: 14px;
     margin-bottom: 10px;
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 `;
 
 const TextArea = styled.textarea`
+  margin-top: 10px;
   padding: 0;
   width: 100%;
   border: none;

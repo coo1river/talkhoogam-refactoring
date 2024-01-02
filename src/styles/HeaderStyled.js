@@ -5,7 +5,7 @@ import Btn from "../components/common/button/Button";
 export const HeaderMain = styled.header`
   width: 100%;
 
-  padding: 13px 20px 12px 12px;
+  padding: 13px 20px 12px 20px;
   background-color: white;
   box-sizing: border-box;
   height: 54px;
@@ -44,7 +44,7 @@ export const HeaderMain = styled.header`
 export const BackBtn = styled.button`
   width: 22px;
   height: 22px;
-  margin-left: 10px;
+  margin: 0 10px;
 `;
 
 export const MenuBtn = styled.button`
@@ -76,15 +76,16 @@ export const UploadBtn = styled(Btn)`
   font-size: 14px;
 `;
 
-export const Backdrop = styled.div`
+export const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
-  background-color: black;
-  opacity: 0.6;
-  z-index: 200;
+  display: ${({ open }) => (open ? "flex" : "none")};
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
 `;
 
 export const HeaderMoreList = styled.article`
