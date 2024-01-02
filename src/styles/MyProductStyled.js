@@ -9,6 +9,10 @@ export const MyProductWrap = styled.article`
   padding: 20px 12px 5px;
   position: relative;
 
+  @media screen and (min-width: 768px) {
+    max-width: 500px;
+  }
+
   & .sub-title-wrap {
     display: flex;
     align-items: center;

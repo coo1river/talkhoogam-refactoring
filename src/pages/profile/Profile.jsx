@@ -280,7 +280,6 @@ const ChangeModal = styled(Modal)`
 
 const ProfilePage = styled.article`
   background-color: white;
-  max-width: 390px;
   margin-bottom: 30px;
   margin-top: 30px;
 `;
@@ -290,7 +289,7 @@ const ProfileMain = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 390px;
+  width: 100%;
 `;
 
 const ProfileHead = styled.div`

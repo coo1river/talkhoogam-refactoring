@@ -5,7 +5,7 @@ import iconArrow from "../assets/icons/icon-arrow-left.svg";
 import { useRecoilValue } from "recoil";
 import loginToken from "../recoil/loginToken";
 import SearchApi from "../api/SearchApi";
-import { SearchList } from "../styles/SearchStyled";
+import { SearchInput, SearchList } from "../styles/SearchStyled";
 import profile from "../assets/images/img-profile.png";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer/Footer";
@@ -95,18 +95,20 @@ export default function Search() {
   return (
     <LayoutStyle>
       <HeaderMain>
-        <BackBtn onClick={goBack}>
-          <img src={iconArrow} alt="뒤로가기 버튼" />
-        </BackBtn>
-        <label className="a11y-hidden" htmlFor="headerInp" />
-        <input
-          type="text"
-          placeholder="검색어를 입력해주세요."
-          onChange={searchValue}
-          className="searchInput"
-          id="headerInp"
-          ref={inputRef}
-        />
+        <SearchInput>
+          <BackBtn onClick={goBack}>
+            <img src={iconArrow} alt="뒤로가기 버튼" />
+          </BackBtn>
+          <label className="a11y-hidden" htmlFor="headerInp" />
+          <input
+            type="text"
+            placeholder="검색어를 입력해주세요."
+            onChange={searchValue}
+            className="searchInput"
+            id="headerInp"
+            ref={inputRef}
+          />
+        </SearchInput>
       </HeaderMain>
       {searchId ? <SearchResult /> : null}
       <Footer />

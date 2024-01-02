@@ -3,7 +3,7 @@ import IconSearch from "../assets/icons/search.svg";
 import Btn from "../components/common/button/Button";
 
 export const HeaderMain = styled.header`
-  width: 100vw;
+  width: 100%;
 
   padding: 13px 20px 12px 12px;
   background-color: white;
@@ -23,26 +23,17 @@ export const HeaderMain = styled.header`
   }
 
   & .searchInput {
-    margin: 0 20px;
+    width: 100%;
     padding: 8px 35px;
     background-color: #f2f2f2;
     box-sizing: border-box;
     border-radius: 30px;
     font-family: "Pretendard", sans-serif;
-    flex-grow: 1;
 
     background-image: url(${IconSearch});
     background-size: 13px 13px;
     background-repeat: no-repeat;
     background-position: 15px 10.5px;
-
-    @media screen and (min-width: 768px) {
-      margin-left: 150px;
-    }
-
-    &::placeholder {
-      margin-left: 30px;
-    }
 
     &:focus {
       outline: none;

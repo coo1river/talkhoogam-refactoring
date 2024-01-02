@@ -14,6 +14,10 @@ export const LayoutStyle = styled.section`
     &::-webkit-scrollbar{
         display: none;
     } */
+
+  @media screen and (min-width: 768px) {
+    margin-left: 160px;
+  }
 `;
 
 export const LayoutInsideStyle = styled.div`

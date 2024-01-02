@@ -160,6 +160,11 @@ const List = styled.li`
   font-size: 14px;
   padding: 16px 21px;
 
+  @media screen and (min-width: 768px) {
+    max-width: 500px;
+    box-sizing: border-box;
+  }
+
   .list-profileimg {
     width: 42px;
     height: 42px;
@@ -232,6 +237,7 @@ const UlStyled = styled.ul`
   margin-bottom: 50px;
   position: relative;
   min-height: 300px;
+  width: 100%;
 
   .noneFeed {
     display: flex;

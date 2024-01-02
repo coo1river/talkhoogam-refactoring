@@ -8,7 +8,7 @@ export const SearchList = styled.article`
   align-self: start;
 
   @media screen and (min-width: 768px) {
-    margin-left: 195px;
+    margin-left: 35px;
   }
 
   & .search-keyword {
@@ -33,4 +33,11 @@ export const SearchList = styled.article`
     font-size: 12px;
     color: var(--color-darkgrey);
   }
+`;
+
+export const SearchInput = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
