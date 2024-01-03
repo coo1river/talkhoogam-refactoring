@@ -44,6 +44,7 @@ function Footer() {
 
   return (
     <>
+      {modalOpen && <PostInsertModal setModalOpen={setModalOpen} />}
       <FooterLayout>
         <img src={LogoImg} alt="로고 이미지" className="img-logo" />
         <FooterIconWrap
@@ -162,8 +163,6 @@ function Footer() {
             fill="#56b778"
           />
         </FooterIconWrap>
-
-        {modalOpen && <PostInsertModal setModalOpen={setModalOpen} />}
       </FooterLayout>
     </>
   );

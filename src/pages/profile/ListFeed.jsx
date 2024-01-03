@@ -141,7 +141,7 @@ export default function ListFeed(accountname) {
           id={postId}
           setModalOpen={setModalOpen}
           isLocation={`post`}
-        ></CommonModal>
+        />
       )}
     </UlStyled>
   );
