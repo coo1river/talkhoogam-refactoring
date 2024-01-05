@@ -4,6 +4,7 @@ import arrowRight from "../assets/icons/icon-arrow-right.svg";
 
 // Form
 export const GroupSection = styled.section`
+  width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -57,7 +58,7 @@ export const GatheringItemsStyle = styled.li`
 
 // Gathering List Styles
 export const GroupArticleProto = styled.article`
-  max-width: 100%;
+  width: 100%;
   border-bottom: 1px solid #dedede;
 
   display: flex;

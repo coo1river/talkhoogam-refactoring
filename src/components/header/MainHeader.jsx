@@ -52,7 +52,11 @@ export default function MainHeader({ pageName }) {
         <h1 className="a11y-hidden">톡후감</h1>
         {pageName && <h2>{pageName}</h2>}
         {location.pathname === "/home" ? (
-          <LogoImg src={logoImg} alt="로고" />
+          <>
+            <h2 className="feed tab">피드</h2>
+            <h2 className="product tab">판매</h2>
+            <LogoImg src={logoImg} alt="로고" />
+          </>
         ) : null}
         {location.pathname === "/home" ? (
           <SearchBtn

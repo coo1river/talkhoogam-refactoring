@@ -188,7 +188,7 @@ export default function PostDetail() {
           isLocation={handleIsLocation}
           showModalInComment={showModalInComment} // 넘겨줄 콜백 함수 추가
         ></Comment>
-        <CommentInput id={params.id}></CommentInput>
+        <CommentInput id={params.id} />
         {modalOpen && (
           <CommonModal
             isMine={isMine}

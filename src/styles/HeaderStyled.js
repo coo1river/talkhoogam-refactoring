@@ -17,9 +17,22 @@ export const HeaderMain = styled.header`
   align-items: center;
   z-index: 400;
 
+  @media screen and (min-width: 768px) {
+    justify-content: space-around;
+  }
+
   & h2 {
     font-size: 18px;
     font-weight: bold;
+    flex-grow: 1;
+
+    &.tab {
+      cursor: pointer;
+
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
   }
 
   & .searchInput {
@@ -57,7 +70,7 @@ export const SearchBtn = styled.button`
   height: 24px;
 
   @media screen and (min-width: 768px) {
-    visibility: hidden;
+    display: none;
   }
 `;
 
@@ -66,7 +79,7 @@ export const LogoImg = styled.img`
   height: 40px;
 
   @media screen and (min-width: 768px) {
-    visibility: hidden;
+    display: none;
   }
 `;
 

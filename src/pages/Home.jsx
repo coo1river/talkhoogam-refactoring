@@ -242,12 +242,20 @@ export const FeedWrap = styled.div`
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
+
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   .book-author {
     font-size: 14px;
     margin-bottom: 10px;
     color: #474646;
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 
   .timeline-main-text {
@@ -255,6 +263,10 @@ export const FeedWrap = styled.div`
     line-height: normal;
     margin: 16px 0;
     white-space: pre-line;
+
+    @media screen and (min-width: 768px) {
+      font-size: 17px;
+    }
   }
 
   .timelin-img {
@@ -299,6 +311,10 @@ export const FeedWrap = styled.div`
     line-height: 12px;
     margin-top: 16px;
     margin-bottom: 5px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 13px;
+    }
   }
 `;
 

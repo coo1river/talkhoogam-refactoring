@@ -78,6 +78,10 @@ export const CommentForm = styled.form`
   font-size: 14px;
   font-weight: 400;
 
+  @media screen and (max-width: 768px) {
+    width: 400px;
+  }
+
   .profile-img {
     width: 36px;
     height: 36px;
