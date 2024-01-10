@@ -11,6 +11,64 @@ import LogoImg from "../../assets/images/Logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import timeFormat from "../../utils/timeFormat";
 
+export function ProductLists({ productData, setProductData }) {
+  const location = useLocation();
+  const loginAccountname = useRecoilValue(accountname);
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search); // URL 쿼리 문자열을 가져옵니다.
+  const data = queryParams.get("data"); // 'data' 파라미터 값을 가져옵니다.
+
+  return (
+    <>
+      {productData.length > 0 ? (
+        <ProductListWrap>
+          <h1 className="a11y-hidden">상품 게시물 목록</h1>
+          {productData.map((item, index) => (
+            <div key={index} className="product-list-wrap">
+              <MoreButton
+                onClick={() => navigate(`/product/detail/${item.id}`)}
+              >
+                <div className="product-img-wrap">
+                  <img
+                    className="product-img"
+                    src={item.itemImage}
+                    alt="피드이미지"
+                  />
+                </div>
+                <div className="product-desc-wrap">
+                  <p className="product-name">{item.itemName}</p>
+                  <p className="product-price">
+                    {Intl.NumberFormat().format(item.price)}원
+                  </p>
+                  <p className="product-desc">{item.link}</p>
+                </div>
+                <div className="create-wrap">
+                  <p className="create">{timeFormat(item.createdAt)}</p>
+                </div>
+              </MoreButton>
+            </div>
+          ))}
+        </ProductListWrap>
+      ) : (
+        <>
+          <h1 className="a11y-hidden">판매하는 상품이 존재하지 않습니다.</h1>
+          {loginAccountname === data ? (
+            <Empty image={LogoImg} alt={"404페이지"} isMine={true}>
+              상품을 등록해서 중고 서적을 판매해 보세요!
+            </Empty>
+          ) : (
+            <>
+              <Empty image={LogoImg} alt={"404페이지"} isMine={false}>
+                해당 사용자의 판매 서적이 아직 작성되지 않았습니다.
+              </Empty>
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
+}
+
 export default function ProductList() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search); // URL 쿼리 문자열을 가져옵니다.
@@ -20,7 +78,8 @@ export default function ProductList() {
   const { getProductList } = ProductListAPI(data);
   const [productData, setProductData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
+  console.log(productData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,59 +96,16 @@ export default function ProductList() {
     fetchData();
   }, []);
 
-  console.log(productData);
   return (
     <LayoutStyle>
-      <BasicHeader></BasicHeader>
+      <BasicHeader />
       <LayoutInsideStyle>
-        {productData.length > 0 ? (
-          <ProductListWrap>
-            <h1 className="a11y-hidden">상품 게시물 목록</h1>
-            {productData.map((item, index) => (
-              <div key={index} className="product-list-wrap">
-                <MoreButton
-                  onClick={() => navigate(`/product/detail/${item.id}`)}
-                >
-                  <div className="product-img-wrap">
-                    <img
-                      className="product-img"
-                      src={item.itemImage}
-                      alt="피드이미지"
-                    />
-                  </div>
-                  <div className="product-desc-wrap">
-                    <p className="product-name">{item.itemName}</p>
-                    <p className="product-price">
-                      {Intl.NumberFormat().format(item.price)}원
-                    </p>
-                    <p className="product-desc">{item.link}</p>
-                  </div>
-                  <div className="create-wrap">
-                    <p className="create">{timeFormat(item.createdAt)}</p>
-                  </div>
-                </MoreButton>
-              </div>
-            ))}
-          </ProductListWrap>
-        ) : (
-          <>
-            <h1 className="a11y-hidden">판매하는 상품이 존재하지 않습니다.</h1>
-            {loginAccountname === data ? (
-              <Empty image={LogoImg} alt={"404페이지"} isMine={true}>
-                상품을 등록해서 중고 서적을 판매해 보세요!
-              </Empty>
-            ) : (
-              <>
-                <Empty image={LogoImg} alt={"404페이지"} isMine={false}>
-                  해당 사용자의 판매 서적이 아직 작성되지 않았습니다.
-                </Empty>
-              </>
-            )}
-          </>
-        )}
+        <ProductLists
+          productData={productData}
+          setProductData={setProductData}
+        />
       </LayoutInsideStyle>
-
-      <Footer></Footer>
+      <Footer />
     </LayoutStyle>
   );
 }

@@ -31,7 +31,6 @@ export default function MyProduct() {
     };
     fetchData();
   }, [params.accountname]);
-  // console.log('productList : ', productList);
 
   // 스크롤 핸들러
   const productListRef = useRef(null);
@@ -66,7 +65,7 @@ export default function MyProduct() {
             alt="판매목록보기아이콘"
           />
         </div>
-        {/* <h3 className="sub-title">판매중인 상품</h3> */}
+
         {productList.length !== 0 ? (
           <div className="product-ul-wrap">
             <MyProductUl ref={productListRef}>

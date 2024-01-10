@@ -12,6 +12,12 @@ import { useNavigate } from "react-router-dom";
 import timeFormat from "../utils/timeFormat";
 import BasicHeader from "../components/header/BasicHeader";
 import LikeHeart from "../components/common/LikeHeart";
+import ProductList, {
+  ProductListWrap,
+  ProductLists,
+} from "./product/ProductList";
+import { useRecoilValue } from "recoil";
+import tabState from "../recoil/tabState";
 
 export function HomeContents({ feedData, setFeedData, showModal }) {
   const navigate = useNavigate();
@@ -145,8 +151,9 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
 }
 
 export default function Home() {
-  const [feedData, setFeedData] = useState(() => {}); // 상태를 사용하여 데이터를 저장합니다.
+  const [feedData, setFeedData] = useState(() => {});
   const [modalOpen, setModalOpen] = useState(false);
+  const tabstate = useRecoilValue(tabState);
 
   const showModal = () => {
     modalOpen ? setModalOpen(false) : setModalOpen(true);
@@ -156,12 +163,22 @@ export default function Home() {
     <LayoutStyle>
       <BasicHeader />
       <LayoutInsideStyle>
-        <HomeContents
-          feedData={feedData}
-          setFeedData={setFeedData}
-          showModal={showModal}
-        />
-        {modalOpen && <CommonModal setModalOpen={setModalOpen}></CommonModal>}
+        {tabstate === "feed" ? (
+          <>
+            <HomeContents
+              feedData={feedData}
+              setFeedData={setFeedData}
+              showModal={showModal}
+            />
+            {modalOpen && (
+              <CommonModal setModalOpen={setModalOpen}></CommonModal>
+            )}
+          </>
+        ) : (
+          <>
+            <ProductLists />
+          </>
+        )}
       </LayoutInsideStyle>
       <Footer />
     </LayoutStyle>

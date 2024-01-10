@@ -5,10 +5,9 @@ import Btn from "../components/common/button/Button";
 export const HeaderMain = styled.header`
   width: 100%;
 
-  padding: 13px 20px 12px 20px;
   background-color: white;
   box-sizing: border-box;
-  height: 54px;
+  max-height: 54px;
   text-align: center;
   border-bottom: 2px solid #dddcdc8c;
 
@@ -17,11 +16,8 @@ export const HeaderMain = styled.header`
   align-items: center;
   z-index: 400;
 
-  @media screen and (min-width: 768px) {
-    justify-content: space-around;
-  }
-
   & h2 {
+    padding: 15px 20px 15px 20px;
     font-size: 18px;
     font-weight: bold;
     flex-grow: 1;
@@ -32,6 +28,10 @@ export const HeaderMain = styled.header`
       @media screen and (max-width: 768px) {
         display: none;
       }
+    }
+
+    &.active {
+      background-color: #dddcdc8c;
     }
   }
 
@@ -51,6 +51,23 @@ export const HeaderMain = styled.header`
     &:focus {
       outline: none;
     }
+  }
+`;
+
+// 톡후감 로고, 검색 버튼 묶은 div
+export const HomeHeader = styled.div`
+  padding: 13px 20px 15px 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & div {
+    width: 24px;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 `;
 
