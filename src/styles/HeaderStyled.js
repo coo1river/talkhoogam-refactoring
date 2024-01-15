@@ -99,6 +99,7 @@ export const MenuBtn = styled.button`
 export const SearchBtn = styled.button`
   width: 24px;
   height: 24px;
+  margin: 0 10px;
 
   @media screen and (min-width: 768px) {
     display: none;
