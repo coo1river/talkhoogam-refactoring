@@ -4,7 +4,7 @@ import Btn from "../components/common/button/Button";
 
 export const HeaderMain = styled.header`
   width: 100%;
-  padding-right: 20px;
+  padding-right: 10px;
 
   background-color: white;
   box-sizing: border-box;

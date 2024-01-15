@@ -11,7 +11,7 @@ import LogoImg from "../../assets/images/Logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import timeFormat from "../../utils/timeFormat";
 
-export function ProductListContent({ productData, setProductData }) {
+export function ProductListContent({ productData, setProductData, data }) {
   const location = useLocation();
   const loginAccountname = useRecoilValue(accountname);
   const accountnameValue = useRecoilValue(accountname);
@@ -51,7 +51,7 @@ export function ProductListContent({ productData, setProductData }) {
       ) : (
         <>
           <h1 className="a11y-hidden">판매하는 상품이 존재하지 않습니다.</h1>
-          {loginAccountname === accountnameValue ? (
+          {loginAccountname === data ? (
             <Empty image={LogoImg} alt={"404페이지"} isMine={true}>
               상품을 등록해서 중고 서적을 판매해 보세요!
             </Empty>
@@ -72,11 +72,11 @@ export default function ProductList() {
   const location = useLocation();
 
   const loginAccountname = useRecoilValue(accountname);
-  const { getProductList } = ProductListAPI(loginAccountname);
-  const [productData, setProductData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const queryParams = new URLSearchParams(location.search); // URL 쿼리 문자열을 가져옵니다.
   const data = queryParams.get("data"); // 'data' 파라미터 값을 가져옵니다.
+  const { getProductList } = ProductListAPI(data);
+  const [productData, setProductData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -102,6 +102,7 @@ export default function ProductList() {
           <ProductListContent
             productData={productData}
             setProductData={setProductData}
+            data={data}
           />
           <Footer />
         </LayoutStyle>
@@ -123,7 +124,7 @@ const MoreButton = styled.div`
   cursor: pointer;
   border: none;
   display: flex;
-  margin: 10px 0;
+  margin: 10px 20px;
 
   .product-img {
     width: 130px;

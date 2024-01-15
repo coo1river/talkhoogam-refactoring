@@ -22,11 +22,6 @@ export default function MyProduct() {
   const accountName = params.accountname;
   const [productList, setProductList] = useState([]);
   const { getProductList } = ProductListAPI(accountName);
-  const [renderProductList, setRenderProductList] = useState(false);
-
-  const location = useLocation();
-  const loginAccountname = useRecoilValue(accountname);
-  const [productData, setProductData] = useState([]);
 
   // 게시물 API 불러오기
   useEffect(() => {
@@ -57,12 +52,10 @@ export default function MyProduct() {
       behavior: "smooth",
     });
   }
-  console.log(renderProductList);
 
   const handleClick = () => {
     // 쿼리 문자열을 사용하여 데이터 전달
     navigate(`/sellbook?data=${params.accountname}`);
-    setRenderProductList(true);
   };
 
   return (
