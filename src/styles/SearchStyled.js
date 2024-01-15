@@ -5,6 +5,7 @@ export const SearchList = styled.article`
   display: flex;
   gap: 10px;
   cursor: pointer;
+  align-self: start;
 
   & .search-keyword {
     display: flex;
@@ -28,4 +29,10 @@ export const SearchList = styled.article`
     font-size: 12px;
     color: var(--color-darkgrey);
   }
+`;
+
+export const SearchInput = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;

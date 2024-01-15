@@ -32,44 +32,45 @@ export default function LayerFeed(accountname) {
 
   return (
     <Layer>
-    {loading && myFeedData.post.length === 0 ? (
-      <>
-        <h1 className="a11y-hidden">게시글이 존재하지 않습니다.</h1>
-        <div className="noneFeed">        
-        <img src={LogoImg}></img>
-        게시글이 존재하지 않습니다.
-        </div>
-      </>
-    ) : (
-      loading &&
-      myFeedData.post.map((item, index) => (
-        <div className="feedlayer" key={index}>
-          <button className="content">
-            {/* 피드가 추가될때마다 content div 추가 */}
-            <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
-              <img src={item.image} alt="예시 사진" className="bookImg" />
-              {item.image.length >= 1 ? (
-                <img
-                  src={ImgLayes}
-                  alt="이미지 2장 이상일 경우 나타나는 아이콘"
-                  className="bookMultiple"
-                />
-              ) : (
-                <p className="a11y-hidden">1장이에용</p>
-              )}
-            </MoreButton>
-          </button>
-        </div>
-      ))
-    )}
-  </Layer>
+      {loading && myFeedData.post.length === 0 ? (
+        <>
+          <h1 className="a11y-hidden">게시글이 존재하지 않습니다.</h1>
+          <div className="noneFeed">
+            <img src={LogoImg}></img>
+            게시글이 존재하지 않습니다.
+          </div>
+        </>
+      ) : (
+        loading &&
+        myFeedData.post.map((item, index) => (
+          <div className="feedlayer" key={index}>
+            <button className="content">
+              {/* 피드가 추가될때마다 content div 추가 */}
+              <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
+                <img src={item.image} alt="예시 사진" className="bookImg" />
+                {item.image.length >= 1 ? (
+                  <img
+                    src={ImgLayes}
+                    alt="이미지 2장 이상일 경우 나타나는 아이콘"
+                    className="bookMultiple"
+                  />
+                ) : (
+                  <p className="a11y-hidden">1장이에용</p>
+                )}
+              </MoreButton>
+            </button>
+          </div>
+        ))
+      )}
+    </Layer>
   );
 }
 const MoreButton = styled.div`
   cursor: pointer;
-  height: 160px;
 `;
 const Layer = styled.div`
+  width: 100%;
+  max-width: 390px;
   display: grid; // 재웅 그리드로 바꾸고 도망갑니다
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
@@ -78,6 +79,16 @@ const Layer = styled.div`
   padding-bottom: 10px;
   position: relative;
   min-height: 300px;
+  place-items: center;
+
+  box-sizing: border-box;
+  padding: 10px;
+
+  @media screen and (min-width: 768px) {
+    max-width: 500px;
+    gap: 8px;
+  }
+
   .content {
     position: relative;
     overflow: hidden;
@@ -93,8 +104,12 @@ const Layer = styled.div`
   .feedlayer .bookImg {
     //책표지 api 사이즈 따라서 수정
     box-sizing: border-box;
-    min-width: 108px;
-    min-height: 160px;
+    transform: scale(1.02);
+
+    @media screen and (min-width: 768px) {
+      min-width: 140px;
+      min-height: 200px;
+    }
   }
   .feedlayer .bookMultiple {
     position: absolute;
@@ -102,7 +117,7 @@ const Layer = styled.div`
     right: 3px;
   }
   .bookImg:hover {
-    transform: scale(1.03);
+    transform: scale(1.05);
     cursor: pointer;
   }
 
@@ -114,10 +129,9 @@ const Layer = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    /* margin-top: 90px; */
     margin-bottom: 90px;
     transform: translate(-50%, -50%);
-  };
+  }
   .noneFeed img {
     width: 110px;
     display: block;

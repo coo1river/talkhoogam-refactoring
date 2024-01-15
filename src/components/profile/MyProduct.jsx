@@ -7,10 +7,13 @@ import {
   MyProductWrap,
   ScrollHandler,
 } from "../../styles/MyProductStyled";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import arrowLeft from "../../assets/icons/icon-arrow-white.svg";
 import arrowRight from "../../assets/icons/icon-arrow-right.svg";
 import pageMoveIcon from "../../assets/icons/angle-small-right.svg";
+import ProductList from "../../pages/product/ProductList";
+import { useRecoilValue } from "recoil";
+import accountname from "../../recoil/accountname";
 
 export default function MyProduct() {
   const navigate = useNavigate();
@@ -19,6 +22,7 @@ export default function MyProduct() {
   const accountName = params.accountname;
   const [productList, setProductList] = useState([]);
   const { getProductList } = ProductListAPI(accountName);
+
   // 게시물 API 불러오기
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +35,6 @@ export default function MyProduct() {
     };
     fetchData();
   }, [params.accountname]);
-  // console.log('productList : ', productList);
 
   // 스크롤 핸들러
   const productListRef = useRef(null);
@@ -66,7 +69,7 @@ export default function MyProduct() {
             alt="판매목록보기아이콘"
           />
         </div>
-        {/* <h3 className="sub-title">판매중인 상품</h3> */}
+
         {productList.length !== 0 ? (
           <div className="product-ul-wrap">
             <MyProductUl ref={productListRef}>

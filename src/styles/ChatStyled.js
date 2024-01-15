@@ -1,7 +1,12 @@
 import styled from "styled-components";
+import Footer, {
+  FooterIconWrap,
+  FooterLayout,
+} from "../components/footer/Footer";
 
 export const ChatListWrap = styled.div`
   width: 100%;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -44,6 +49,10 @@ export const ChatListWrap = styled.div`
     overflow: hidden; /* 내용이 넘치면 숨기기 */
     text-overflow: ellipsis; /* 초과 텍스트에 '...' 표시 */
     width: 238px; /* 텍스트가 넘어가는 최대 너비 설정 */
+
+    @media screen and (min-width: 768px) {
+      width: 400px;
+    }
   }
 
   .desc-date {

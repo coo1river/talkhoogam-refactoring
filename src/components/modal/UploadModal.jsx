@@ -12,19 +12,24 @@ export default function UploadModal({ children, onClickHandler, ...props }) {
 }
 
 const ModalWrap = styled.article`
+  margin: 0 auto;
   box-sizing: border-box;
   width: 180px;
   border-radius: 10px;
   background-color: white;
   position: absolute;
-  top: 60px;
-  left: 117px;
+  top: 140px;
+  margin-left: 50px;
+
+  @media screen and (min-width: 768px) {
+    top: 190px;
+    margin-left: 210px;
+  }
 `;
 
 const ContentList = styled.ul`
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
 
   & li {

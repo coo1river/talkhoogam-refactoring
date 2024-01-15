@@ -280,7 +280,6 @@ const ChangeModal = styled(Modal)`
 
 const ProfilePage = styled.article`
   background-color: white;
-  max-width: 390px;
   margin-bottom: 30px;
   margin-top: 30px;
 `;
@@ -290,7 +289,7 @@ const ProfileMain = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 390px;
+  width: 100%;
 `;
 
 const ProfileHead = styled.div`
@@ -412,18 +411,24 @@ const Follow = styled.div`
 const Feed = styled.div`
   //정렬 기능 수정
   background-color: white;
+  width: 100%;
   max-width: 390px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    max-width: 500px;
+  }
 `;
 
 const LayerNav = styled.div`
   display: flex;
   width: 100%;
   flex-direction: row-reverse;
+
   .feedlist {
     margin: 9px;
   }

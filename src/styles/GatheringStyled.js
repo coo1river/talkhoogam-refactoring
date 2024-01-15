@@ -4,7 +4,7 @@ import arrowRight from "../assets/icons/icon-arrow-right.svg";
 
 // Form
 export const GroupSection = styled.section`
-  padding: 10px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +57,7 @@ export const GatheringItemsStyle = styled.li`
 
 // Gathering List Styles
 export const GroupArticleProto = styled.article`
-  max-width: 100%;
+  width: 100%;
   border-bottom: 1px solid #dedede;
 
   display: flex;
@@ -112,6 +112,10 @@ export const GroupLiProto = styled.li`
   max-width: 130px;
   flex-shrink: 0;
 
+  @media screen and (min-width: 768px) {
+    max-width: 140px;
+  }
+
   & .post-thumbnail {
     width: 100%;
     aspect-ratio: 3/4;
@@ -128,6 +132,10 @@ export const GroupLiProto = styled.li`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+
+    @media screen and (min-width: 768px) {
+      font-size: 17px;
+    }
   }
   & .post-info {
     font-size: 13px;
@@ -138,6 +146,10 @@ export const GroupLiProto = styled.li`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     position: relative;
+
+    @media screen and (min-width: 768px) {
+      font-size: 15px;
+    }
   }
 `;
 

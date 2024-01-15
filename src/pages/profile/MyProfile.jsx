@@ -111,7 +111,7 @@ export default function Profile() {
   return (
     <>
       <LayoutStyle>
-        <BasicHeader></BasicHeader>
+        <BasicHeader />
         <ProfilePage>
           <ProfileMain>
             <ProfileHead>
@@ -355,7 +355,7 @@ const Feed = styled.div`
 const LayerNav = styled.div`
   border: 0.5px solid #dbdbdb;
   display: flex;
-  width: 100%;
+  justify-content: end;
   flex-direction: row-reverse;
   .feedlist {
     margin: 9px;

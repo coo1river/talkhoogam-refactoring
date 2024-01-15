@@ -8,10 +8,18 @@ import GetFollowerFeedListAPI from "../api/post/GetFollowerFeedListAPI";
 import Empty from "../components/empty/Empty";
 import LogoImg from "../assets/images/Logo.png";
 import CommonModal from "../components/modal/CommonModal";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import timeFormat from "../utils/timeFormat";
 import BasicHeader from "../components/header/BasicHeader";
 import LikeHeart from "../components/common/LikeHeart";
+import ProductList, {
+  ProductListWrap,
+  ProductLists,
+} from "./product/ProductList";
+import { useRecoilValue } from "recoil";
+import tabState from "../recoil/tabState";
+import ProductListAPI from "../api/product/ProductListAPI";
+import accountname from "../recoil/accountname";
 
 export function HomeContents({ feedData, setFeedData, showModal }) {
   const navigate = useNavigate();
@@ -31,7 +39,6 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
 
     fetchData(); // 데이터 가져오는 함수를 호출
   }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 호출
-  console.log(feedData);
 
   function moveProfile(accountname) {
     navigate(`/profile/${accountname}`);
@@ -146,25 +153,47 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
 }
 
 export default function Home() {
-  const [feedData, setFeedData] = useState(() => {}); // 상태를 사용하여 데이터를 저장합니다.
+  const [feedData, setFeedData] = useState(() => {});
   const [modalOpen, setModalOpen] = useState(false);
+  const tabstate = useRecoilValue(tabState);
 
   const showModal = () => {
     modalOpen ? setModalOpen(false) : setModalOpen(true);
   };
 
+  const location = useLocation();
+  const loginAccountname = useRecoilValue(accountname);
+  const { getProductList } = ProductListAPI(loginAccountname);
+  const [productData, setProductData] = useState([]);
+
   return (
     <LayoutStyle>
       <BasicHeader />
       <LayoutInsideStyle>
-        <HomeContents
-          feedData={feedData}
-          setFeedData={setFeedData}
-          showModal={showModal}
-        />
+        {tabstate === "feed" ? (
+          <>
+            <HomeContents
+              feedData={feedData}
+              setFeedData={setFeedData}
+              showModal={showModal}
+            />
+            {modalOpen && (
+              <CommonModal setModalOpen={setModalOpen}></CommonModal>
+            )}
+          </>
+        ) : (
+          <>
+            <ProductList
+              location={location}
+              loginAccountname={loginAccountname}
+              getProductList={getProductList}
+              productData={productData}
+              setProductData={setProductData}
+            />
+          </>
+        )}
       </LayoutInsideStyle>
       <Footer />
-      {modalOpen && <CommonModal setModalOpen={setModalOpen}></CommonModal>}
     </LayoutStyle>
   );
 }
@@ -172,8 +201,13 @@ export default function Home() {
 export const FeedWrap = styled.div`
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    margin: 0 50px;
+  }
 
   & .symbol-logo {
     margin-top: 220px;
@@ -201,7 +235,15 @@ export const FeedWrap = styled.div`
   }
 
   .user-contents {
-    width: 304px;
+    width: 100%;
+
+    @media screen and (min-width: 390px) {
+      width: 300px;
+    }
+
+    @media screen and (min-width: 768px) {
+      width: 500px;
+    }
   }
 
   .timeline-title-wrap {
@@ -230,12 +272,20 @@ export const FeedWrap = styled.div`
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
+
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   .book-author {
     font-size: 14px;
     margin-bottom: 10px;
     color: #474646;
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 
   .timeline-main-text {
@@ -243,13 +293,21 @@ export const FeedWrap = styled.div`
     line-height: normal;
     margin: 16px 0;
     white-space: pre-line;
+
+    @media screen and (min-width: 768px) {
+      font-size: 17px;
+    }
   }
 
   .timelin-img {
-    width: 304px;
+    width: 100%;
     height: 228px;
     border-radius: 10px;
     object-fit: contain;
+
+    @media screen and (min-width: 768px) {
+      max-width: 400px;
+    }
   }
 
   .social-wrap {
@@ -276,11 +334,6 @@ export const FeedWrap = styled.div`
     justify-content: center;
   }
 
-  /* .social-wrap div::after {
-      margin-left: 6px;
-      content: "55";
-  } */
-
   .wr-date {
     color: #767676;
     font-size: 11px;
@@ -288,6 +341,10 @@ export const FeedWrap = styled.div`
     line-height: 12px;
     margin-top: 16px;
     margin-bottom: 5px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 13px;
+    }
   }
 `;
 

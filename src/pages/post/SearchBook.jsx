@@ -8,6 +8,7 @@ import SearchBookApi from "../../api/post/SearchBookApi";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { author, link, thumbnail, title } from "../../recoil/bookInfo";
+import Footer from "../../components/footer/Footer";
 
 export default function SearchBook() {
   const [bookData, setBookData] = useState([]);
@@ -101,6 +102,7 @@ export default function SearchBook() {
           />
         </HeaderMain>
         {bookData ? <SearchResult /> : null}
+        <Footer />
       </LayoutStyle>
     </div>
   );

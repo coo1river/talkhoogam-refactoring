@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { BackBtn, HeaderMain } from "../../styles/HeaderStyled";
+import { BackBtn, HeaderMain, SearchBox } from "../../styles/HeaderStyled";
 import iconArrow from "../../assets/icons/icon-arrow-left.svg";
 import { useRecoilState } from "recoil";
 import { result } from "../../recoil/searchResult";
@@ -29,18 +29,20 @@ export default function SearchHeader() {
 
   return (
     <HeaderMain>
-      <BackBtn onClick={goBack}>
-        <img src={iconArrow} alt="뒤로가기 버튼" />
-      </BackBtn>
-      <label className="a11y-hidden" htmlFor="headerInp" />
-      <input
-        type="text"
-        placeholder="검색어를 입력해주세요."
-        onChange={searchValue}
-        className="searchInput"
-        id="headerInp"
-        ref={inputRef}
-      />
+      <SearchBox>
+        <BackBtn onClick={goBack}>
+          <img src={iconArrow} alt="뒤로가기 버튼" />
+        </BackBtn>
+        <label className="a11y-hidden" htmlFor="headerInp" />
+        <input
+          type="text"
+          placeholder="검색어를 입력해주세요."
+          onChange={searchValue}
+          className="searchInput"
+          id="headerInp"
+          ref={inputRef}
+        />
+      </SearchBox>
     </HeaderMain>
   );
 }
