@@ -4,23 +4,37 @@ import Btn from "../components/common/button/Button";
 
 export const HeaderMain = styled.header`
   width: 100%;
+  padding-right: 20px;
 
   background-color: white;
   box-sizing: border-box;
-  max-height: 54px;
+  height: 54px;
   text-align: center;
   border-bottom: 2px solid #dddcdc8c;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   z-index: 400;
 
+  & .hidden {
+    width: 32px;
+    height: 22px;
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
   & h2 {
-    padding: 15px 20px 15px 20px;
     font-size: 18px;
     font-weight: bold;
     flex-grow: 1;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &.tab {
       cursor: pointer;
@@ -46,7 +60,7 @@ export const HeaderMain = styled.header`
     background-image: url(${IconSearch});
     background-size: 13px 13px;
     background-repeat: no-repeat;
-    background-position: 15px 10.5px;
+    background-position: 15px 10px;
 
     &:focus {
       outline: none;
@@ -56,7 +70,6 @@ export const HeaderMain = styled.header`
 
 // 톡후감 로고, 검색 버튼 묶은 div
 export const HomeHeader = styled.div`
-  padding: 13px 20px 15px 20px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -80,6 +93,7 @@ export const BackBtn = styled.button`
 export const MenuBtn = styled.button`
   width: 22px;
   height: 22px;
+  margin-right: 10px;
 `;
 
 export const SearchBtn = styled.button`
@@ -225,4 +239,8 @@ export const ModalLogoutStyled = styled.article`
       border-right: 1px solid #dbdbdb;
     }
   }
+`;
+
+export const SearchBox = styled.div`
+  padding: 13px 20px 15px 20px;
 `;

@@ -8,7 +8,7 @@ import GetFollowerFeedListAPI from "../api/post/GetFollowerFeedListAPI";
 import Empty from "../components/empty/Empty";
 import LogoImg from "../assets/images/Logo.png";
 import CommonModal from "../components/modal/CommonModal";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import timeFormat from "../utils/timeFormat";
 import BasicHeader from "../components/header/BasicHeader";
 import LikeHeart from "../components/common/LikeHeart";
@@ -18,6 +18,8 @@ import ProductList, {
 } from "./product/ProductList";
 import { useRecoilValue } from "recoil";
 import tabState from "../recoil/tabState";
+import ProductListAPI from "../api/product/ProductListAPI";
+import accountname from "../recoil/accountname";
 
 export function HomeContents({ feedData, setFeedData, showModal }) {
   const navigate = useNavigate();
@@ -159,6 +161,11 @@ export default function Home() {
     modalOpen ? setModalOpen(false) : setModalOpen(true);
   };
 
+  const location = useLocation();
+  const loginAccountname = useRecoilValue(accountname);
+  const { getProductList } = ProductListAPI(loginAccountname);
+  const [productData, setProductData] = useState([]);
+
   return (
     <LayoutStyle>
       <BasicHeader />
@@ -176,7 +183,13 @@ export default function Home() {
           </>
         ) : (
           <>
-            <ProductLists />
+            <ProductList
+              location={location}
+              loginAccountname={loginAccountname}
+              getProductList={getProductList}
+              productData={productData}
+              setProductData={setProductData}
+            />
           </>
         )}
       </LayoutInsideStyle>
