@@ -74,7 +74,7 @@ export default function ProductList() {
   const loginAccountname = useRecoilValue(accountname);
   const queryParams = new URLSearchParams(location.search); // URL 쿼리 문자열을 가져옵니다.
   const data = queryParams.get("data"); // 'data' 파라미터 값을 가져옵니다.
-  const { getProductList } = ProductListAPI(data);
+  const { getProductList } = ProductListAPI(data || loginAccountname);
   const [productData, setProductData] = useState([]);
   const [loading, setLoading] = useState(false);
 
