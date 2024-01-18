@@ -209,7 +209,7 @@ export const ModalLogoutStyled = styled.article`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 300;
+  z-index: 500;
 
   & .question {
     margin: 22px 50px;

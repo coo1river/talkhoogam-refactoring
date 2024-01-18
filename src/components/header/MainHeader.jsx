@@ -38,7 +38,7 @@ export default function MainHeader({ pageName }) {
   return (
     <>
       {moreOpen && (
-        <ModalBackground open={moreOpen} onClick={() => setMoreOpen(false)}>
+        <ModalBackground open={moreOpen}>
           {moreOpen && <MoreList setMoreOpen={setMoreOpen} />}
         </ModalBackground>
       )}

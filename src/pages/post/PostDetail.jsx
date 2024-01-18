@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { json, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import PostDetailAPI from "../../api/post/PostDetailAPI";
 import { LayoutStyle, LayoutInsideStyle } from "../../styles/LayoutStyled";
@@ -35,46 +35,14 @@ export default function PostDetail() {
     const detailList = async () => {
       try {
         const list = await getPostDetail(params.id);
-        console.log(list.post.content);
+        // api로 받아온 data를 json 파일로 변환
+        const data = JSON.parse(list.post.content);
         setPostDetail(list.post);
 
-        const titleMatch = list.post.content.match(/bookTitle:(.*?),/);
-        if (titleMatch) {
-          const title = titleMatch[1];
-          if (title) {
-            setBookTitle(title);
-          } else {
-            setBookTitle("");
-          }
-        } else {
-          setBookTitle("");
-        }
-
-        const authorMatch = list.post.content.match(/bookAuthor:(.*?),/);
-        if (authorMatch) {
-          const author = authorMatch[1];
-          if (author) {
-            setBookAuthor(author);
-          } else {
-            setBookAuthor("");
-          }
-        } else {
-          setBookAuthor("");
-        }
-
-        const contentMatch = list.post.content.match(
-          /inputContent:(.*?)(?:,|$)/
-        );
-        if (contentMatch) {
-          const content = contentMatch[1];
-          if (content) {
-            setBookContent(content);
-          } else {
-            setBookContent("");
-          }
-        } else {
-          setBookContent("");
-        }
+        // 제목, 저자, 내용을 각 useState에 저장
+        setBookTitle(data.bookTitle);
+        setBookAuthor(data.bookAuthor);
+        setBookContent(data.inputContent);
       } catch (error) {
         console.error("에러", error);
       }

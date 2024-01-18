@@ -62,10 +62,6 @@ export const useValid = (form) => {
     }
   };
 
-  // useEffect(() => {
-  //   BtnActive(form, error);
-  // }, [form, error, BtnActive]);
-
   // api 호출, 성공 시 로그인 페이지로 이동
   const HandleJoin = async (e) => {
     e.preventDefault();

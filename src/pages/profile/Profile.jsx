@@ -124,7 +124,6 @@ export default function Profile() {
     }
     fetchData();
   }, [params.accountname]);
-  console.log(userInfo);
 
   //팔로워 목록
   const navigate = useNavigate();

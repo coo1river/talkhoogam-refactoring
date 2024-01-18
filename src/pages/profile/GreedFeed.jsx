@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ImgLayes from "../../assets/icons/icon-img-layers.svg";
 import MyFeedListAPI from "../../api/post/MyFeedListAPI.jsx";
-import Empty from "../../components/empty/Empty";
 import LogoImg from "../../assets/images/Logo.png";
-import NoneImg from "../../assets/icons/none.png";
 
 export default function LayerFeed(accountname) {
   const navigate = useNavigate();
@@ -27,8 +24,6 @@ export default function LayerFeed(accountname) {
     };
     fetchData();
   }, [accountname]);
-  console.log("myFeedData : ", myFeedData);
-  //console.log(accountname.accountname)
 
   return (
     <Layer>

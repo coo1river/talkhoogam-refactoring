@@ -27,7 +27,11 @@ export default function PostUpload() {
   const [bookAuthor, setBookAuthor] = useRecoilState(author);
   const [bookThumb, setBookThumb] = useRecoilState(thumbnail);
 
-  const inputValue = `bookTitle:${bookTitle}, bookAuthor:${bookAuthor}, inputContent:${inputContent}`;
+  const inputValue = {
+    bookTitle: bookTitle,
+    bookAuthor: bookAuthor,
+    inputContent: inputContent,
+  };
 
   const { postUpload } = PostUploadAPI({ inputValue, itemImage });
 
@@ -216,12 +220,13 @@ export default function PostUpload() {
 const PositionWrap = styled.div`
   position: relative;
   min-height: 500px;
-  margin: 0 20px;
+  width: 100%;
 `;
 
 const ContentWrap = styled.div`
   display: flex;
   gap: 10px;
+  margin: 0 20px;
   justify-content: center;
 
   /* position: relative; */

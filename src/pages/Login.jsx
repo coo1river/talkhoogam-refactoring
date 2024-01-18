@@ -10,7 +10,6 @@ import {
   SnsLoginBtn,
   ErrorText,
   InputWrap,
-  LogoStyle,
 } from "../styles/LoginStyled";
 import LogoImg from "../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
@@ -68,8 +67,8 @@ export default function Login() {
         setIsLogin(true);
         setIsAccountname(newAccountname);
 
-        localStorage.setItem("userToken", newToken);
-        // sessionStorage.setItem("userToken", newToken);
+        // localStorage.setItem("userToken", newToken);
+        sessionStorage.setItem("userToken", newToken);
         navigate("/home");
       } else {
         setError("이메일 또는 비밀번호가 일치하지 않습니다.");
@@ -105,9 +104,9 @@ export default function Login() {
       <SnsLoginText>SNS 로그인</SnsLoginText>
 
       <SnsLogin>
-        <SnsLoginBtn className="btn-kakao"></SnsLoginBtn>
-        <SnsLoginBtn className="btn-facebook"></SnsLoginBtn>
-        <SnsLoginBtn className="btn-google"></SnsLoginBtn>
+        <SnsLoginBtn className="btn-kakao" />
+        <SnsLoginBtn className="btn-facebook" />
+        <SnsLoginBtn className="btn-google" />
       </SnsLogin>
       <Link to="/join">회원가입</Link>
     </LoginPage>

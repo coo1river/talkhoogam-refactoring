@@ -62,60 +62,17 @@ export default function PostModify() {
     const detailList = async () => {
       try {
         const list = await getPostDetail();
-        console.log("list.post:", list.post);
-        console.log("bookTitle:", bookTitle);
-        console.log("bookAuthor:", bookAuthor);
-        console.log("bookContent:", bookContent);
-
-        console.log(list.post.content);
-        setPostDetail(list.post);
-
-        if (list.post) {
-          const titleMatch = list.post.content.match(/bookTitle:(.*?),/);
-          if (titleMatch) {
-            const title = titleMatch[1];
-            if (title) {
-              setBookTitle(title);
-            } else {
-              setBookTitle("");
-            }
-          } else {
-            setBookTitle("");
-          }
-
-          const authorMatch = list.post.content.match(/bookAuthor:(.*?),/);
-          if (authorMatch) {
-            const author = authorMatch[1];
-            if (author) {
-              setBookAuthor(author);
-            } else {
-              setBookAuthor("");
-            }
-          } else {
-            setBookAuthor("");
-          }
-
-          const contentMatch = list.post.content.match(
-            /inputContent:(.*?)(?:,|$)/
-          );
-          if (contentMatch) {
-            const content = contentMatch[1];
-            if (content) {
-              setBookContent(content);
-            } else {
-              setBookContent("");
-            }
-          } else {
-            setBookContent("");
-          }
-        }
+        const data = JSON.parse(list.post.content);
+        setBookTitle(data.bookTitle);
+        setBookAuthor(data.bookAuthor);
+        setBookContent(data.inputContent);
       } catch (error) {
         console.error("에러", error);
       }
     };
     detailList();
   }, [params.id]);
-  // console.log(postDetail)
+
   return (
     <LayoutStyle>
       <h1 className="a11y-hidden">피드 수정 페이지</h1>
