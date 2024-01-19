@@ -14,8 +14,6 @@ function Empty({ image, alt, children, navigatePath, isMine }) {
 
   //page 이름 가져오기
   function getPageName(pathName) {
-    // console.log(pathName);
-
     switch (pathName) {
       case "/home":
         return "검색하기";

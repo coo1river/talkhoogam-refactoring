@@ -8,7 +8,6 @@ export default function BasicHeader() {
   const params = useParams();
   const userName = params.name;
   const userAccount = params.accountname;
-  // console.log(`userName : ${userName}, userAccount : ${userAccount}`);
 
   //page 이름 가져오기
   function getPageName(pathName) {

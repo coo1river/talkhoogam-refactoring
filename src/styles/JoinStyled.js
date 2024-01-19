@@ -1,11 +1,19 @@
 import styled from "styled-components";
 import { Btn } from "../components/common/button/Button";
+import { LayoutStyle } from "./LayoutStyled";
+
+export const ProfileLayout = styled(LayoutStyle)`
+  @media screen and (min-width: 768px) {
+    margin-left: 0;
+  }
+`;
 
 export const PageArticle = styled.article`
-  @media screen and (max-width: 390px) {
-    min-width: 390px;
+  @media screen and (min-width: 768px) {
+    width: 500px;
   }
 
+  width: 390px;
   max-width: 500px;
   height: 100vh;
   margin: 0 auto;

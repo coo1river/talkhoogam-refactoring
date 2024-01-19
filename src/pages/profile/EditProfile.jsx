@@ -7,6 +7,7 @@ import {
   ErrorText,
   NextBtn,
   InputWrap,
+  ProfileLayout,
 } from "../../styles/JoinStyled";
 import {
   SetProfileForm,
@@ -105,7 +106,6 @@ export default function EditProfile() {
   // 프로필 수정 api
   const EditData = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", form);
     const res = await EditProfileApi(
       token,
       form.userName,
@@ -120,7 +120,7 @@ export default function EditProfile() {
   };
 
   return (
-    <LayoutStyle>
+    <ProfileLayout>
       <BasicHeader />
       <PageArticle>
         <PageTitle style={{ marginTop: "0px" }}>프로필 수정</PageTitle>
@@ -189,6 +189,6 @@ export default function EditProfile() {
           </NextBtn>
         </SetProfileForm>
       </PageArticle>
-    </LayoutStyle>
+    </ProfileLayout>
   );
 }
