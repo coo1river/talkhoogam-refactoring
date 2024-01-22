@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import FollowerListAPI from '../../api/profile/FollowerListAPI';
-import { LayoutInsideStyle, LayoutStyle } from '../../styles/LayoutStyled';
-import BasicHeader from '../../components/header/BasicHeader';
-import Footer from '../../components/footer/Footer';
-import { FollowListStyle } from '../../styles/FollowStyled';
-import { useParams } from 'react-router-dom';
-import AccountNameProfileAPI from '../../api/post/AcountNameProfileAPI';
-import FollowItems from '../../components/profile/FollowItems';
+import React, { useEffect, useState } from "react";
+import FollowerListAPI from "../../api/profile/FollowerListAPI";
+import { LayoutInsideStyle, LayoutStyle } from "../../styles/LayoutStyled";
+import BasicHeader from "../../components/header/BasicHeader";
+import Footer from "../../components/footer/Footer";
+import { FollowListStyle } from "../../styles/FollowStyled";
+import { useParams } from "react-router-dom";
+import AccountNameProfileAPI from "../../api/post/AcountNameProfileAPI";
+import FollowItems from "../../components/profile/FollowItems";
 
 export default function Followers() {
   // userAccountName 불러오기
@@ -23,14 +23,13 @@ export default function Followers() {
         const userInfo = await getFollowerList();
         setUserFollowerList(userInfo);
       } catch (error) {
-        console.error('데이터를 불러오는데 실패하였습니다.', error);
+        console.error("데이터를 불러오는데 실패하였습니다.", error);
       }
     };
     fetchData();
   }, []);
-  // console.log('userFollowerList : ', userFollowerList);
 
-  // 팔로워리스트
+  // 팔로워 리스트
   function FollowerList() {
     return (
       <FollowListStyle>

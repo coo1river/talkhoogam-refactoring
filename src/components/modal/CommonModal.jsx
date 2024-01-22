@@ -103,8 +103,8 @@ export default function CommonModal({
         <ModalInsideLayout>
           {isMine ? (
             <>
-              <ModalButton onClick={showDeleteHandler}>삭제</ModalButton>
               <ModalButton onClick={onClickHandler}>수정</ModalButton>
+              <ModalButton onClick={showDeleteHandler}>삭제</ModalButton>
             </>
           ) : (
             <ModalButton>신고하기</ModalButton>

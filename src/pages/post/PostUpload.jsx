@@ -48,8 +48,6 @@ export default function PostUpload() {
   // 별점 값 뽑아 내기
   let score = onStar.filter(Boolean).length;
 
-  console.log(score);
-
   const inputValue = {
     bookTitle: bookTitle,
     bookAuthor: bookAuthor,

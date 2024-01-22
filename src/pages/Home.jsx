@@ -23,7 +23,6 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
   const navigate = useNavigate();
   const { getFeedListAPI } = GetFollowerFeedListAPI();
   const [loding, setLoding] = useState(false);
-  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -164,9 +163,6 @@ export default function Home() {
               setFeedData={setFeedData}
               showModal={showModal}
             />
-            {modalOpen && (
-              <CommonModal setModalOpen={setModalOpen}></CommonModal>
-            )}
           </>
         ) : (
           <>
@@ -180,6 +176,7 @@ export default function Home() {
           </>
         )}
       </LayoutInsideStyle>
+      {modalOpen && <CommonModal setModalOpen={setModalOpen} />}
       <Footer />
     </LayoutStyle>
   );
