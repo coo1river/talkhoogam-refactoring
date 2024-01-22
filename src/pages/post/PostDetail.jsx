@@ -15,6 +15,7 @@ import timeFormat from "../../utils/timeFormat";
 import LikeHeart from "../../components/common/LikeHeart";
 import { ClipLoader } from "react-spinners";
 import Footer, { FooterLayout } from "../../components/footer/Footer";
+import Rating from "../../components/common/Rating";
 
 export default function PostDetail() {
   const params = useParams();
@@ -30,6 +31,7 @@ export default function PostDetail() {
   const [bookTitle, setBookTitle] = useState("");
   const [bookAuthor, setBookAuthor] = useState("");
   const [bookContent, setBookContent] = useState("");
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const detailList = async () => {
@@ -43,6 +45,7 @@ export default function PostDetail() {
         setBookTitle(data.bookTitle);
         setBookAuthor(data.bookAuthor);
         setBookContent(data.inputContent);
+        setScore(data.rating);
       } catch (error) {
         console.error("에러", error);
       }
@@ -88,7 +91,7 @@ export default function PostDetail() {
   return (
     <LayoutStyle>
       <h1 className="a11y-hidden">피드 상세보기 페이지</h1>
-      <BasicHeader></BasicHeader>
+      <BasicHeader />
       <LayoutInsideStyle>
         <PostDetailWrap>
           {postDetail ? (
@@ -119,12 +122,13 @@ export default function PostDetail() {
                 </div>
                 <p className="timeline-id">@ {postDetail.author.accountname}</p>
                 <img
-                  className="timelin-img"
+                  className="timeline-img"
                   src={postDetail.image}
                   alt="피드이미지"
                 />
                 <strong className="book-title">{bookTitle}</strong>
                 <p className="book-author">{bookAuthor}</p>
+                <Rating rating={score} />
                 <p className="timeline-main-text">{bookContent}</p>
                 <div className="social-wrap">
                   <div>
@@ -229,12 +233,20 @@ export const PostDetailWrap = styled.div`
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
+
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   .book-author {
     font-size: 14px;
     margin-bottom: 10px;
     color: #474646;
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 
   .timeline-title {
@@ -252,10 +264,14 @@ export const PostDetailWrap = styled.div`
     line-height: normal;
     margin: 16px 0;
     white-space: pre-line;
+
+    @media screen and (min-width: 768px) {
+      font-size: 17px;
+    }
   }
 
-  .timelin-img {
-    width: 304px;
+  .timeline-img {
+    width: 100%;
     height: 228px;
     border-radius: 10px;
     object-fit: contain;

@@ -8,6 +8,9 @@ import IconUpload from "../../assets/icons/icon-upload.svg";
 import { validateImage } from "../../utils/imageValidate";
 import PostDetailAPI from "../../api/post/PostDetailAPI";
 import { useParams } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
+import { Rating } from "./PostUpload";
+import { FaStar } from "react-icons/fa";
 
 export default function PostModify() {
   const [postDetail, setPostDetail] = useState(() => {});
@@ -21,12 +24,33 @@ export default function PostModify() {
   const [bookAuthor, setBookAuthor] = useState("");
   const [bookContent, setBookContent] = useState("");
 
+  // 별점 상태, 별점 array
+  const [onStar, setOnStar] = useState([false, false, false, false, false]);
+  const array = [0, 1, 2, 3, 4];
+
+  // 별점 값 뽑아 내기
+  let score = onStar.filter(Boolean).length;
+
   const hendleResizeHeight = () => {
     textareaRef.current.style.height = "auto";
     textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
   };
 
-  const content = `bookTitle:${bookTitle}, bookAuthor:${bookAuthor}, inputContent:${bookContent}`;
+  const content = {
+    bookTitle: bookTitle,
+    bookAuthor: bookAuthor,
+    inputContent: bookContent,
+    rating: score,
+  };
+
+  // 별점 클릭 함수
+  const handleStar = (index) => {
+    let clickStates = [...onStar];
+    for (let i = 0; i < 5; i++) {
+      clickStates[i] = i <= index ? true : false;
+    }
+    setOnStar(clickStates);
+  };
 
   const { postModify } = PostModifyAPI(content, itemImage, id);
   const onClickHandler = async (e) => {
@@ -63,9 +87,18 @@ export default function PostModify() {
       try {
         const list = await getPostDetail();
         const data = JSON.parse(list.post.content);
+        console.log(data);
         setBookTitle(data.bookTitle);
         setBookAuthor(data.bookAuthor);
         setBookContent(data.inputContent);
+        setPostDetail(list.post);
+
+        // score 값을 이용하여 onStar 설정
+        let clickStates = [...onStar];
+        for (let i = 0; i < 5; i++) {
+          clickStates[i] = i < data.rating ? true : false;
+        }
+        setOnStar(clickStates);
       } catch (error) {
         console.error("에러", error);
       }
@@ -89,11 +122,24 @@ export default function PostModify() {
                 />
                 <InputWrap>
                   <img
+                    onClick={handleChangeImage}
                     src={imgSrc ? imgSrc : postDetail.image}
                     alt="업로드 이미지"
                   />
                   <strong className="book-title">{bookTitle}</strong>
                   <p className="book-author">{bookAuthor}</p>
+                  <Rating>
+                    {array.map((el, idx) => {
+                      return (
+                        <FaStar
+                          key={idx}
+                          size="25"
+                          onClick={() => handleStar(el)}
+                          className={onStar[el] && "rating"}
+                        />
+                      );
+                    })}
+                  </Rating>
                   <TextArea
                     placeholder="책 후기를 남겨주세요."
                     ref={textareaRef}
@@ -110,6 +156,7 @@ export default function PostModify() {
             )}
           </ContentWrap>
         </PositionWrap>
+        <Footer />
       </LayoutInsideStyle>
     </LayoutStyle>
   );
@@ -118,6 +165,7 @@ export default function PostModify() {
 const PositionWrap = styled.div`
   position: relative;
   min-height: 500px;
+  width: 100%;
 `;
 
 const ContentWrap = styled.div`
@@ -125,7 +173,6 @@ const ContentWrap = styled.div`
   justify-content: space-between;
   gap: 12px;
 
-  /* position: relative; */
   .profile-img {
     width: 42px;
     height: 42px;
@@ -135,14 +182,19 @@ const ContentWrap = styled.div`
 `;
 
 const InputWrap = styled.div`
-  width: 304px;
+  width: 100%;
+  line-height: 1.3rem;
 
   img {
-    width: 304px;
+    width: 100%;
     height: 228px;
     border-radius: 10px;
     object-fit: contain;
     margin-bottom: 16px;
+
+    @media screen and (min-width: 768px) {
+      height: 300px;
+    }
   }
 
   .book-title {
@@ -150,20 +202,34 @@ const InputWrap = styled.div`
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
+
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   .book-author {
     font-size: 14px;
     margin-bottom: 10px;
     color: #474646;
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 `;
 
 const TextArea = styled.textarea`
+  font-size: 15px;
   width: 100%;
+  height: 300px;
   border: none;
   resize: none;
   font-family: var(--font-mainFont);
+
+  @media screen and (min-width: 768px) {
+    font-size: 17px;
+  }
 
   &:focus {
     outline: none;

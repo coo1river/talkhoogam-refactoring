@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { LayoutStyle, LayoutInsideStyle } from "../../styles/LayoutStyled";
+import { LayoutStyle } from "../../styles/LayoutStyled";
 import BasicHeader from "../../components/header/BasicHeader";
 import { useRecoilValue } from "recoil";
 import accountname from "../../recoil/accountname";
@@ -11,10 +11,8 @@ import LogoImg from "../../assets/images/Logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import timeFormat from "../../utils/timeFormat";
 
-export function ProductListContent({ productData, setProductData, data }) {
-  const location = useLocation();
+export function ProductListContent({ productData, data }) {
   const loginAccountname = useRecoilValue(accountname);
-  const accountnameValue = useRecoilValue(accountname);
   const navigate = useNavigate();
 
   return (
@@ -131,6 +129,11 @@ const MoreButton = styled.div`
     height: 130px;
     border-radius: 10px;
     object-fit: cover;
+
+    @media screen and (min-width: 768px) {
+      width: 150px;
+      height: 150px;
+    }
   }
 
   .product-desc-wrap {
@@ -141,13 +144,27 @@ const MoreButton = styled.div`
     }
   }
 
+  .product-name {
+    font-size: 18px;
+    font-weight: 600;
+
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
   .product-price {
+    font-size: 16px;
     color: var(--color-mainColor);
     font-weight: bold;
+
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+    }
   }
 
   .product-desc {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--color-darkgrey);
     display: -webkit-box; /* 웹킷 브라우저용 박스 모델 설정 */
     -webkit-box-orient: vertical; /* 웹킷 브라우저용 박스 방향 설정 */
@@ -155,6 +172,10 @@ const MoreButton = styled.div`
     text-overflow: ellipsis; /* 넘치는 텍스트를 ...으로 표시하는 설정 */
     -webkit-line-clamp: 3; /* 표시할 줄 수 설정 */
     max-height: 3.6em; /* 3줄에 대한 높이 설정 (1.2em/줄) */
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 
   .create-wrap {
@@ -168,6 +189,10 @@ const MoreButton = styled.div`
 
   .create {
     font-size: 11px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 14px;
+    }
   }
 `;
 

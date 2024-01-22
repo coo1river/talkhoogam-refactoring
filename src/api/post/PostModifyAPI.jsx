@@ -17,7 +17,7 @@ function PostModifyAPI(postDetail, itemImage, id) {
         },
         body: JSON.stringify({
           post: {
-            content: postDetail,
+            content: JSON.stringify(postDetail),
             image: itemImage ? itemImage : postDetail.itemImage,
           },
         }),

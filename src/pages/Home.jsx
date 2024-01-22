@@ -17,18 +17,19 @@ import { useRecoilValue } from "recoil";
 import tabState from "../recoil/tabState";
 import ProductListAPI from "../api/product/ProductListAPI";
 import accountname from "../recoil/accountname";
+import Rating from "../components/common/Rating";
 
 export function HomeContents({ feedData, setFeedData, showModal }) {
   const navigate = useNavigate();
   const { getFeedListAPI } = GetFollowerFeedListAPI();
   const [loding, setLoding] = useState(false);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getFeedListAPI(); // 데이터 가져오기
         setFeedData(data); // 데이터를 상태에 저장
-        console.log(data);
         setLoding(true);
       } catch (error) {
         console.error("데이터 가져오기 오류:", error);
@@ -60,6 +61,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                   bookTitle: "",
                   bookAuthor: "",
                   bookContent: "",
+                  bookRating: 0,
                 };
 
                 // item.content를 JSON 문자열에서 객체로 변환
@@ -69,6 +71,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                 bookData.bookTitle = contentObj.bookTitle;
                 bookData.bookAuthor = contentObj.bookAuthor;
                 bookData.bookContent = contentObj.inputContent;
+                bookData.bookRating = contentObj.rating;
 
                 return (
                   <div key={index} className="user-timeline">
@@ -105,6 +108,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                         {bookData.bookTitle}
                       </strong>
                       <p className="book-author">{bookData.bookAuthor}</p>
+                      <Rating rating={bookData.bookRating} />
                       <p className="timeline-main-text">
                         {bookData.bookContent}
                       </p>
@@ -275,7 +279,10 @@ export const FeedWrap = styled.div`
     font-size: 15px;
     line-height: normal;
     margin: 16px 0;
+    height: 3.8rem;
+
     white-space: pre-line;
+    overflow: hidden;
 
     @media screen and (min-width: 768px) {
       font-size: 17px;
