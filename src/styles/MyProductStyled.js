@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Button from "../components/common/button/Button";
 
 export const MyProductWrap = styled.article`
   box-sizing: border-box;
@@ -30,7 +29,10 @@ export const MyProductWrap = styled.article`
     display: inline-block;
     font-size: 17px;
     font-weight: bold;
-    /* margin-bottom: 16px; */
+
+    @media screen and (min-width: 768px) {
+      font-size: 19px;
+    }
   }
 
   & .error-list {
@@ -127,10 +129,18 @@ export const MyProductLi = styled.li`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+
+    @media screen and (min-width: 768px) {
+      font-size: 17px;
+    }
   }
 
   & .product-price {
     font-size: 13px;
     color: var(--color-mainColor);
+
+    @media screen and (min-width: 768px) {
+      font-size: 15px;
+    }
   }
 `;

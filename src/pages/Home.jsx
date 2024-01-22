@@ -12,19 +12,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import timeFormat from "../utils/timeFormat";
 import BasicHeader from "../components/header/BasicHeader";
 import LikeHeart from "../components/common/LikeHeart";
-import ProductList, {
-  ProductListWrap,
-  ProductLists,
-} from "./product/ProductList";
+import ProductList from "./product/ProductList";
 import { useRecoilValue } from "recoil";
 import tabState from "../recoil/tabState";
 import ProductListAPI from "../api/product/ProductListAPI";
 import accountname from "../recoil/accountname";
+import Rating from "../components/common/Rating";
 
 export function HomeContents({ feedData, setFeedData, showModal }) {
   const navigate = useNavigate();
   const { getFeedListAPI } = GetFollowerFeedListAPI();
   const [loding, setLoding] = useState(false);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,25 +61,18 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                   bookTitle: "",
                   bookAuthor: "",
                   bookContent: "",
+                  bookRating: 0,
                 };
 
-                const titleMatch = item.content.match(/bookTitle:(.*?),/);
-                const authorMatch = item.content.match(/bookAuthor:(.*?),/);
-                const contentMatch = item.content.match(
-                  /inputContent:(.*?)(?:,|$)/
-                );
+                // item.content를 JSON 문자열에서 객체로 변환
+                const contentObj = JSON.parse(item.content);
 
-                if (titleMatch) {
-                  bookData.bookTitle = titleMatch[1] || "";
-                }
+                // 해당 객체의 아이템을 각각 제목, 저자, 내용에 할당
+                bookData.bookTitle = contentObj.bookTitle;
+                bookData.bookAuthor = contentObj.bookAuthor;
+                bookData.bookContent = contentObj.inputContent;
+                bookData.bookRating = contentObj.rating;
 
-                if (authorMatch) {
-                  bookData.bookAuthor = authorMatch[1] || "";
-                }
-
-                if (contentMatch) {
-                  bookData.bookContent = contentMatch[1] || "";
-                }
                 return (
                   <div key={index} className="user-timeline">
                     <img
@@ -116,17 +108,12 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                         {bookData.bookTitle}
                       </strong>
                       <p className="book-author">{bookData.bookAuthor}</p>
+                      <Rating rating={bookData.bookRating} />
                       <p className="timeline-main-text">
                         {bookData.bookContent}
                       </p>
                       <div className="social-wrap">
                         <div>
-                          {/* <img
-                            onClick={colorChangeHandler}
-                            className="social-icon"
-                            src={iconColor}
-                            alt="하트아이콘"
-                          /> */}
                           <LikeHeart />
                         </div>
                         <div>
@@ -292,7 +279,10 @@ export const FeedWrap = styled.div`
     font-size: 15px;
     line-height: normal;
     margin: 16px 0;
+    height: 3.8rem;
+
     white-space: pre-line;
+    overflow: hidden;
 
     @media screen and (min-width: 768px) {
       font-size: 17px;

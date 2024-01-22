@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  Backdrop,
-  HeaderMoreList,
-  ModalLogoutStyled,
-} from "../../styles/HeaderStyled";
-import { Link, useNavigate } from "react-router-dom";
+import { HeaderMoreList, ModalLogoutStyled } from "../../styles/HeaderStyled";
+import { useNavigate } from "react-router-dom";
 import iconX from "../../assets/icons/x.svg";
 import { useRecoilState } from "recoil";
 import loginToken from "../../recoil/loginToken";
@@ -14,11 +10,14 @@ import accountname from "../../recoil/accountname";
 export default function MoreList({ setMoreOpen }) {
   // 로그인 확인
   const [isLogin, setIsLogin] = useRecoilState(loginCheck);
+
   // 로그인 토큰, accountName
   const [token, setToken] = useRecoilState(loginToken);
   const [accountName, setAccountName] = useRecoilState(accountname);
+
   // 로그아웃 modal
   const [showLogout, setShowLogout] = useState(false);
+
   // 페이지 이동
   const navigate = useNavigate();
 
@@ -48,12 +47,10 @@ export default function MoreList({ setMoreOpen }) {
 
   // 로그아웃
   function funcLogout() {
+    console.log("되긴됨?");
     setIsLogin(false);
     setToken(null);
     setAccountName("");
-    console.log("login : " + isLogin);
-    console.log("token : " + token);
-    console.log("accountName : " + accountName);
     navigate("/login");
     setShowLogout(false);
     setMoreOpen(false);
@@ -65,27 +62,11 @@ export default function MoreList({ setMoreOpen }) {
         <ul>
           {isLogin ? <li onClick={MoveEditProfile}>개인 정보 수정</li> : ""}
           <li>
-            <BtnLogout>로그아웃</BtnLogout>
+            <button onClick={() => setShowLogout(true)}>
+              {isLogin ? "로그아웃" : "로그인"}
+            </button>
           </li>
         </ul>
-      </>
-    );
-  }
-
-  function BtnLogout() {
-    // 로그인 / 로그아웃
-    function logout() {
-      if (isLogin) {
-        setShowLogout(true);
-      } else {
-        console.log("login : " + isLogin);
-        navigate("/login");
-      }
-    }
-
-    return (
-      <>
-        <button onClick={logout}>{isLogin ? "로그아웃" : "로그인"}</button>
       </>
     );
   }

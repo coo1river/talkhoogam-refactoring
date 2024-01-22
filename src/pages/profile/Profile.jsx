@@ -55,25 +55,6 @@ export default function Profile() {
     navigate("../productadd");
   };
 
-  //유저 정보 불러오기
-  {
-    /*const [profileInfo, setProfileInfo] = useState(() => {});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const info = await ProfileInfoAPI();
-        setProfileInfo(info);
-      } catch (error) {
-        console.error("API 호출 중 오류 발생", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUserData();
-  }, []);*/
-  }
-
   const { getFeedListAPI } = GetFollowerFeedListAPI();
   //피드 스타일 선택
   const [gridStyle, setGridStyle] = useState(false); //켜짐
@@ -124,7 +105,6 @@ export default function Profile() {
     }
     fetchData();
   }, [params.accountname]);
-  console.log(userInfo);
 
   //팔로워 목록
   const navigate = useNavigate();
@@ -302,6 +282,10 @@ const ProfileHead = styled.div`
   .profilehead-text {
     font-size: 13px;
     color: #767676;
+
+    @media screen and (min-width: 768px) {
+      font-size: 15px;
+    }
   }
   .userName {
     font-weight: bold;
@@ -312,12 +296,21 @@ const ProfileHead = styled.div`
     width: 110px;
     border-radius: 110px;
     margin: 0 31px 0 40px;
+
+    @media screen and (min-width: 768px) {
+      width: 130px;
+      height: 130px;
+    }
   }
   button {
     margin-bottom: 6px;
     font-size: 18px;
     font-weight: bold;
     color: black;
+
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+    }
   }
   .followerText:hover {
     cursor: pointer;
@@ -336,16 +329,28 @@ const ProfileMid = styled.div`
     font-weight: bold;
     color: black;
     font-size: 17px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 19px;
+    }
   }
   .id {
     margin: 2px auto;
     font-size: 13px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 15px;
+    }
   }
   .profileIntro {
     width: 200px;
     font-size: 15px;
     margin: 20px auto;
     margin-bottom: 0;
+
+    @media screen and (min-width: 768px) {
+      font-size: 17px;
+    }
   }
 `;
 

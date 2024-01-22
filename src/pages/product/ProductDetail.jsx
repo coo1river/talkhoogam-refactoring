@@ -10,6 +10,7 @@ import { useRecoilValue } from "recoil";
 import newAaccountname from "../../recoil/accountname";
 import timeFormat from "../../utils/timeFormat";
 import { ClipLoader } from "react-spinners";
+import Footer from "../../components/footer/Footer";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
@@ -36,7 +37,6 @@ export default function ProductDetail() {
     };
     detailList();
   }, [getProductDetail]);
-  // console.log(productDetail)
 
   function onClickProfile(id) {
     navigate(`/profile/${id}`);
@@ -97,6 +97,7 @@ export default function ProductDetail() {
             <ClipLoader color="#56b778" size={20} speedMultiplier={0.7} />
           </Loading>
         )}
+        <Footer />
       </LayoutInsideStyle>
       {modalOpen && (
         <CommonModal
@@ -104,7 +105,7 @@ export default function ProductDetail() {
           setModalOpen={setModalOpen}
           id={params.id}
           isLocation={"product"}
-        ></CommonModal>
+        />
       )}
     </LayoutStyle>
   );

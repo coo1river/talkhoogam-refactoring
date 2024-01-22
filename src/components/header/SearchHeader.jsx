@@ -18,7 +18,6 @@ export default function SearchHeader() {
   // searchInput의 value
   function searchValue(e) {
     setSearchResult(e.target.value);
-    console.log(searchResult);
   }
 
   // 뒤로가기

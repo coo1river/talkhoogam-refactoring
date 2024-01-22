@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { json, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import PostDetailAPI from "../../api/post/PostDetailAPI";
 import { LayoutStyle, LayoutInsideStyle } from "../../styles/LayoutStyled";
@@ -15,6 +15,7 @@ import timeFormat from "../../utils/timeFormat";
 import LikeHeart from "../../components/common/LikeHeart";
 import { ClipLoader } from "react-spinners";
 import Footer, { FooterLayout } from "../../components/footer/Footer";
+import Rating from "../../components/common/Rating";
 
 export default function PostDetail() {
   const params = useParams();
@@ -30,51 +31,21 @@ export default function PostDetail() {
   const [bookTitle, setBookTitle] = useState("");
   const [bookAuthor, setBookAuthor] = useState("");
   const [bookContent, setBookContent] = useState("");
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const detailList = async () => {
       try {
         const list = await getPostDetail(params.id);
-        console.log(list.post.content);
+        // api로 받아온 data를 json 파일로 변환
+        const data = JSON.parse(list.post.content);
         setPostDetail(list.post);
 
-        const titleMatch = list.post.content.match(/bookTitle:(.*?),/);
-        if (titleMatch) {
-          const title = titleMatch[1];
-          if (title) {
-            setBookTitle(title);
-          } else {
-            setBookTitle("");
-          }
-        } else {
-          setBookTitle("");
-        }
-
-        const authorMatch = list.post.content.match(/bookAuthor:(.*?),/);
-        if (authorMatch) {
-          const author = authorMatch[1];
-          if (author) {
-            setBookAuthor(author);
-          } else {
-            setBookAuthor("");
-          }
-        } else {
-          setBookAuthor("");
-        }
-
-        const contentMatch = list.post.content.match(
-          /inputContent:(.*?)(?:,|$)/
-        );
-        if (contentMatch) {
-          const content = contentMatch[1];
-          if (content) {
-            setBookContent(content);
-          } else {
-            setBookContent("");
-          }
-        } else {
-          setBookContent("");
-        }
+        // 제목, 저자, 내용을 각 useState에 저장
+        setBookTitle(data.bookTitle);
+        setBookAuthor(data.bookAuthor);
+        setBookContent(data.inputContent);
+        setScore(data.rating);
       } catch (error) {
         console.error("에러", error);
       }
@@ -120,7 +91,7 @@ export default function PostDetail() {
   return (
     <LayoutStyle>
       <h1 className="a11y-hidden">피드 상세보기 페이지</h1>
-      <BasicHeader></BasicHeader>
+      <BasicHeader />
       <LayoutInsideStyle>
         <PostDetailWrap>
           {postDetail ? (
@@ -151,12 +122,13 @@ export default function PostDetail() {
                 </div>
                 <p className="timeline-id">@ {postDetail.author.accountname}</p>
                 <img
-                  className="timelin-img"
+                  className="timeline-img"
                   src={postDetail.image}
                   alt="피드이미지"
                 />
                 <strong className="book-title">{bookTitle}</strong>
                 <p className="book-author">{bookAuthor}</p>
+                <Rating rating={score} />
                 <p className="timeline-main-text">{bookContent}</p>
                 <div className="social-wrap">
                   <div>
@@ -261,12 +233,20 @@ export const PostDetailWrap = styled.div`
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
+
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   .book-author {
     font-size: 14px;
     margin-bottom: 10px;
     color: #474646;
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 
   .timeline-title {
@@ -284,10 +264,14 @@ export const PostDetailWrap = styled.div`
     line-height: normal;
     margin: 16px 0;
     white-space: pre-line;
+
+    @media screen and (min-width: 768px) {
+      font-size: 17px;
+    }
   }
 
-  .timelin-img {
-    width: 304px;
+  .timeline-img {
+    width: 100%;
     height: 228px;
     border-radius: 10px;
     object-fit: contain;

@@ -1,12 +1,10 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-const { persistAtom } =
-  recoilPersist();
-  //     {
-  //   key: "sessionStorage",
-  //   storage: sessionStorage,
-  // }
+const { persistAtom } = recoilPersist({
+  key: "sessionStorage",
+  storage: sessionStorage,
+});
 
 const loginToken = atom({
   key: "loginToken",

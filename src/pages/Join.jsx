@@ -134,10 +134,7 @@ export default function Join() {
           minLength="6"
           maxLength="20"
           onChange={PasswordValue}
-          onBlur={(e) => {
-            PasswordValid(e);
-            PwCheckValid(e);
-          }}
+          onBlur={PasswordValid}
         />
         <ErrorText>{pwErr}</ErrorText>
 

@@ -4,15 +4,15 @@ import UploadHeader from "../../components/header/UploadHeader";
 import PostUploadAPI from "../../api/post/PostUploadAPI";
 import ProfileInfoAPI from "../../api/profile/ProfileInfoAPI";
 import styled from "styled-components";
-import IconUpload from "../../assets/icons/icon-upload.svg";
 import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
 import { validateImage } from "../../utils/imageValidate";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { author, link, thumbnail, title } from "../../recoil/bookInfo";
 import bookImg from "../../assets/images/book.png";
 import UploadModal from "../../components/modal/UploadModal";
 import Footer from "../../components/footer/Footer";
+import { FaStar } from "react-icons/fa";
 
 export default function PostUpload() {
   const [imgSrc, setImgSrc] = useState("");
@@ -27,14 +27,37 @@ export default function PostUpload() {
   const [bookAuthor, setBookAuthor] = useRecoilState(author);
   const [bookThumb, setBookThumb] = useRecoilState(thumbnail);
 
-  const inputValue = `bookTitle:${bookTitle}, bookAuthor:${bookAuthor}, inputContent:${inputContent}`;
-
-  const { postUpload } = PostUploadAPI({ inputValue, itemImage });
-
   // 책 정보 값 상태 확인
   const [bookInfo, setBookInfo] = useState(false);
 
   const [openModal, setOpenModal] = useState(false);
+
+  // 별점 상태, 별점 array
+  const [onStar, setOnStar] = useState([false, false, false, false, false]);
+  const array = [0, 1, 2, 3, 4];
+
+  // 별점 클릭 함수
+  const handleStar = (index) => {
+    let clickStates = [...onStar];
+    for (let i = 0; i < 5; i++) {
+      clickStates[i] = i <= index ? true : false;
+    }
+    setOnStar(clickStates);
+  };
+
+  // 별점 값 뽑아 내기
+  let score = onStar.filter(Boolean).length;
+
+  console.log(score);
+
+  const inputValue = {
+    bookTitle: bookTitle,
+    bookAuthor: bookAuthor,
+    inputContent: inputContent,
+    rating: score,
+  };
+
+  const { postUpload } = PostUploadAPI({ inputValue, itemImage });
 
   const navigate = useNavigate();
 
@@ -107,19 +130,6 @@ export default function PostUpload() {
     setOpenModal(false);
   };
 
-  // 모달 창 열렸을 때 배경 어둡게
-  const ModalBackground = styled.div`
-    width: 100%;
-    height: 100%;
-    display: ${({ open }) => (open ? "flex" : "none")};
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 999;
-  `;
-
   const handleUpload = () => {
     // 클릭 시 파일 입력(input) 엘리먼트를 트리거합니다.
     if (inputImage.current) {
@@ -138,6 +148,18 @@ export default function PostUpload() {
         />
         <strong className="book-title">{bookTitle}</strong>
         <p className="book-author">{bookAuthor}</p>
+        <Rating>
+          {array.map((el, idx) => {
+            return (
+              <FaStar
+                key={idx}
+                size="25"
+                onClick={() => handleStar(el)}
+                className={onStar[el] && "rating"}
+              />
+            );
+          })}
+        </Rating>
       </Book>
     );
   };
@@ -184,7 +206,6 @@ export default function PostUpload() {
                         onClick={(e) => navigate("/searchbook")}
                       />
                     )}
-
                     {/* 책 정보 */}
                     {bookThumb ? <BookInfo /> : null}
                     {itemImage || bookThumb ? null : (
@@ -213,18 +234,31 @@ export default function PostUpload() {
   );
 }
 
+// 모달 창 열렸을 때 배경 어둡게
+const ModalBackground = styled.div`
+  width: 100%;
+  height: 100%;
+  display: ${({ open }) => (open ? "flex" : "none")};
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+`;
+
 const PositionWrap = styled.div`
   position: relative;
   min-height: 500px;
-  margin: 0 20px;
+  width: 100%;
 `;
 
 const ContentWrap = styled.div`
   display: flex;
   gap: 10px;
+  margin: 0 20px;
   justify-content: center;
 
-  /* position: relative; */
   .profile-img {
     width: 42px;
     height: 42px;
@@ -265,6 +299,28 @@ const SearchBook = styled.div`
   }
 `;
 
+export const Rating = styled.div`
+  display: flex;
+  margin: 10px 0;
+
+  & svg {
+    color: gray;
+    cursor: pointer;
+  }
+
+  :hover svg {
+    color: #fcc419;
+  }
+
+  & svg:hover ~ svg {
+    color: gray;
+  }
+
+  .rating {
+    color: #fcc419;
+  }
+`;
+
 const InputWrap = styled.div`
   width: 100%;
   img {
@@ -299,7 +355,8 @@ const Book = styled.div`
   & .book-author {
     color: #474646;
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+
     @media screen and (min-width: 768px) {
       font-size: 16px;
     }

@@ -39,7 +39,6 @@ export default function Profile() {
   };
   const onClickHandler = async () => {
     const info = await ProfileInfoAPI();
-    console.log(info);
   };
 
   //팔로워 목록

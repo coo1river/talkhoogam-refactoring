@@ -2,13 +2,13 @@ import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
 import { useNavigate } from "react-router-dom";
 
-function PostUploadAPI(info) {
+function PostUploadAPI({ inputValue, itemImage }) {
   const token = useRecoilValue(loginToken);
   const navigate = useNavigate();
-  const { inputValue, itemImage } = info;
 
   const postUpload = async () => {
     const url = "https://api.mandarin.weniv.co.kr";
+    console.log("inputValue:", inputValue);
 
     try {
       const res = await fetch(`${url}/post`, {
@@ -19,7 +19,7 @@ function PostUploadAPI(info) {
         },
         body: JSON.stringify({
           post: {
-            content: inputValue,
+            content: JSON.stringify(inputValue),
             image: itemImage,
           },
         }),

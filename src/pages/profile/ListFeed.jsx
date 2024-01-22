@@ -12,6 +12,8 @@ import CommonModal from "../../components/modal/CommonModal";
 import { useRecoilValue } from "recoil";
 import timeFormat from "../../utils/timeFormat.js";
 import LikeHeart from "../../components/common/LikeHeart";
+import { Rating } from "../post/PostUpload.jsx";
+import { FaStar } from "react-icons/fa";
 
 export default function ListFeed(accountname) {
   const navigate = useNavigate();
@@ -23,12 +25,25 @@ export default function ListFeed(accountname) {
   const loginName = useRecoilValue(accountName);
   const [postId, setPostId] = useState("");
 
+  // 별점 상태, 별점 array
+  const [onStar, setOnStar] = useState([false, false, false, false, false]);
+  const array = [0, 1, 2, 3, 4];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const list = await getMyFeedListAPI();
         setMyFeedData(list);
         setLoading(true);
+
+        console.log(list);
+
+        // score 값을 이용하여 onStar 설정
+        let clickStates = [...onStar];
+        for (let i = 0; i < 5; i++) {
+          clickStates[i] = i < list.rating ? true : false;
+        }
+        setOnStar(clickStates);
       } catch (error) {
         console.error("데이터 가져오기 오류:", error);
         setLoading(false);
@@ -36,7 +51,7 @@ export default function ListFeed(accountname) {
     };
     fetchData();
   }, [accountname]);
-  //console.log("myFeedData : ", myFeedData);
+
   //더보기 버튼
   const showModal = (name, id) => {
     modalOpen ? setModalOpen(false) : setModalOpen(true);
@@ -78,21 +93,12 @@ export default function ListFeed(accountname) {
             bookContent: "",
           };
 
-          const titleMatch = item.content.match(/bookTitle:(.*?),/);
-          const authorMatch = item.content.match(/bookAuthor:(.*?),/);
-          const contentMatch = item.content.match(/inputContent:(.*?)(?:,|$)/);
+          const contentObj = JSON.parse(item.content);
 
-          if (titleMatch) {
-            bookData.bookTitle = titleMatch[1] || "";
-          }
-
-          if (authorMatch) {
-            bookData.bookAuthor = authorMatch[1] || "";
-          }
-
-          if (contentMatch) {
-            bookData.bookContent = contentMatch[1] || "";
-          }
+          // 해당 객체의 아이템을 각각 제목, 저자, 내용에 할당
+          bookData.bookTitle = contentObj.bookTitle;
+          bookData.bookAuthor = contentObj.bookAuthor;
+          bookData.bookContent = contentObj.inputContent;
 
           return (
             <List key={item.id}>
@@ -119,10 +125,19 @@ export default function ListFeed(accountname) {
                 </MoreButton>
                 <strong className="book-title">{bookData.bookTitle}</strong>
                 <p className="book-author">{bookData.bookAuthor}</p>
+                <Rating>
+                  {array.map((el, idx) => {
+                    return (
+                      <FaStar
+                        key={idx}
+                        size="25"
+                        className={onStar[el] && "rating"}
+                      />
+                    );
+                  })}
+                </Rating>
                 <p className="list-text">{bookData.bookContent}</p>
                 <div className="list-icon">
-                  {/*<img onClick={colorChangeHandler} src={iconColor} alt="좋아요"/>
-                <p>{item.heartCount}</p>*/}
                   <LikeHeart />
                   <img src={IconMessage} alt="댓글" />
                   <p>{item.commentCount}</p>
@@ -177,12 +192,20 @@ const List = styled.li`
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
+
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   .book-author {
     font-size: 14px;
     margin-bottom: 10px;
     color: #474646;
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 
   .feedlist {
@@ -192,9 +215,13 @@ const List = styled.li`
     flex-grow: 1;
   }
   .list-name {
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 600;
     max-width: 300px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 19px;
+    }
   }
 
   .list-id {
@@ -202,11 +229,24 @@ const List = styled.li`
     margin-top: 4px;
   }
   .list-img {
-    width: 90px;
-    height: 160px;
+    width: 100px;
+    height: 150px;
     border-radius: 10px;
     margin: 10px auto;
+
+    @media screen and (min-width: 768px) {
+      width: 120px;
+      height: 170px;
+    }
   }
+  .list-text {
+    font-size: 14px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
   .list-icon {
     display: flex;
     margin: 12px auto;

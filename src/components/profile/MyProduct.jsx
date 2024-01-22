@@ -2,18 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import ProductListAPI from "../../api/product/ProductListAPI";
 import MyProductItems from "./MyProductItems";
 import {
-  MyProductLi,
   MyProductUl,
   MyProductWrap,
   ScrollHandler,
 } from "../../styles/MyProductStyled";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import arrowLeft from "../../assets/icons/icon-arrow-white.svg";
 import arrowRight from "../../assets/icons/icon-arrow-right.svg";
 import pageMoveIcon from "../../assets/icons/angle-small-right.svg";
-import ProductList from "../../pages/product/ProductList";
-import { useRecoilValue } from "recoil";
-import accountname from "../../recoil/accountname";
 
 export default function MyProduct() {
   const navigate = useNavigate();

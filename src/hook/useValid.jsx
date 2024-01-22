@@ -62,10 +62,6 @@ export const useValid = (form) => {
     }
   };
 
-  // useEffect(() => {
-  //   BtnActive(form, error);
-  // }, [form, error, BtnActive]);
-
   // api 호출, 성공 시 로그인 페이지로 이동
   const HandleJoin = async (e) => {
     e.preventDefault();
@@ -79,7 +75,6 @@ export const useValid = (form) => {
       form.image
     );
     if (JoinRes.status !== 422) {
-      console.log(JoinRes);
       const createToken = JoinRes.user.token;
       const joinData = JoinRes.user;
       setToken(createToken);
@@ -116,10 +111,8 @@ export const useValid = (form) => {
       !error.userIdErr &&
       !error.introErr
     ) {
-      console.log("활성화");
       setBtnState(false);
     } else {
-      console.log("비활성화");
       setBtnState(true);
     }
   };
