@@ -1,9 +1,5 @@
-import { useRecoilValue } from "recoil";
-import loginToken from "../../recoil/loginToken";
-
 const ProfileInfoAPI = async () => {
-  const token = useRecoilValue(loginToken);
-  // const token = localStorage.getItem("userToken");
+  const token = sessionStorage.getItem("userToken");
   const url = "https://api.mandarin.weniv.co.kr";
   try {
     const response = await fetch(`${url}/user/myinfo`, {
