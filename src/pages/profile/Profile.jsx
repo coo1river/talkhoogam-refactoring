@@ -262,6 +262,7 @@ const ProfilePage = styled.article`
   background-color: white;
   margin-bottom: 30px;
   margin-top: 30px;
+  padding: 0 30px;
 `;
 
 const ProfileMain = styled.div`

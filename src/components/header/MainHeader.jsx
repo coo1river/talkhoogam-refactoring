@@ -7,7 +7,6 @@ import {
   MenuBtn,
   SearchBtn,
   HomeHeader,
-  HeaderDiv,
 } from "../../styles/HeaderStyled";
 import MoreList from "./MoreList";
 import iconArrow from "../../assets/icons/icon-arrow-left.svg";
@@ -52,7 +51,6 @@ export default function MainHeader({ pageName }) {
         )}
 
         <h1 className="a11y-hidden">톡후감</h1>
-        <div className="hidden" />
         {pageName && <h2>{pageName}</h2>}
         {location.pathname === "/home" ? (
           <>

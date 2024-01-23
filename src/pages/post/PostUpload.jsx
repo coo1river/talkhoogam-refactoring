@@ -13,6 +13,8 @@ import bookImg from "../../assets/images/book.png";
 import UploadModal from "../../components/modal/UploadModal";
 import Footer from "../../components/footer/Footer";
 import { FaStar } from "react-icons/fa";
+import Loading from "../../components/loading/Loading";
+import { ClipLoader } from "react-spinners";
 
 export default function PostUpload() {
   const [imgSrc, setImgSrc] = useState("");
@@ -221,7 +223,9 @@ export default function PostUpload() {
                   </InputWrap>
                 </>
               ) : (
-                <p>로딩 중 ..</p>
+                <Loading>
+                  <ClipLoader color="#56b778" size={20} speedMultiplier={0.7} />
+                </Loading>
               )}
             </ContentWrap>
           </PositionWrap>
