@@ -284,8 +284,8 @@ const ContentWrap = styled.div`
 `;
 
 const SearchBook = styled.div`
-  width: 300px;
-  height: 180px;
+  width: 250px;
+  height: 150px;
   border-radius: 20px;
   background-color: var(--color-trans-grey);
   border: 2px solid #e7e7e7;
@@ -296,8 +296,8 @@ const SearchBook = styled.div`
   background-position: center center;
 
   @media screen and (min-width: 768px) {
-    width: 500px;
-    height: 300px;
+    width: 400px;
+    height: 250px;
   }
 `;
 
