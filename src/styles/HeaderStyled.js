@@ -123,6 +123,7 @@ export const UploadBtn = styled(Btn)`
   width: 92px;
   padding: 7px 31px;
   font-size: 14px;
+  margin: 0 10px;
 `;
 
 export const ModalBackground = styled.div`

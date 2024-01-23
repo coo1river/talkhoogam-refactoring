@@ -1,6 +1,6 @@
-import React from 'react';
-import { BackBtn, HeaderMain, UploadBtn } from '../../styles/HeaderStyled';
-import iconArrow from '../../assets/icons/icon-arrow-left.svg';
+import React from "react";
+import { BackBtn, HeaderMain, UploadBtn } from "../../styles/HeaderStyled";
+import iconArrow from "../../assets/icons/icon-arrow-left.svg";
 
 export default function UploadHeader({ onClickHandler }) {
   function goBack(e) {
