@@ -56,9 +56,6 @@ export default function ProductAdd() {
 
     const imageURL = await ImageUploadAPI(file);
 
-    // 이미지 최적화 및 크기 조정
-    // const resizeImageURL = await optimizeAndResizeImage(file, 800, 600); // 원하는 크기로 조정
-    // setImgSrc(imageURL)
     setImgSrc(imageURL);
     setItemImage(imageURL);
   };

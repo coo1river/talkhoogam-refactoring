@@ -17,7 +17,7 @@ export default function Rating({ rating }) {
   return (
     <Stars>
       {array.map((el, idx) => (
-        <FaStar key={idx} size="25" className={onStar[el] && "rating"} />
+        <FaStar key={idx} size="20" className={onStar[el] && "rating"} />
       ))}
     </Stars>
   );
@@ -28,7 +28,7 @@ const Stars = styled.div`
   margin: 10px 0;
 
   & svg {
-    color: gray;
+    color: #ddd;
   }
 
   .rating {

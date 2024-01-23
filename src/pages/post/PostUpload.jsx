@@ -73,7 +73,7 @@ export default function PostUpload() {
     setBookThumb("");
   };
 
-  // 파일 가져오기
+  // 이미지 파일 가져오기
   const handleChangeImage = async (e) => {
     const file = e.target.files[0];
 
@@ -96,6 +96,13 @@ export default function PostUpload() {
     setImgSrc(imageURL);
     setItemImage(imageURL);
     setOpenModal(false);
+  };
+
+  const handleUpload = () => {
+    // 클릭 시 파일 입력(input) 엘리먼트를 트리거합니다.
+    if (inputImage.current) {
+      inputImage.current.click();
+    }
   };
 
   useEffect(() => {
@@ -128,13 +135,6 @@ export default function PostUpload() {
     setOpenModal(false);
   };
 
-  const handleUpload = () => {
-    // 클릭 시 파일 입력(input) 엘리먼트를 트리거합니다.
-    if (inputImage.current) {
-      inputImage.current.click();
-    }
-  };
-
   // 책 정보 게시물에 등록
   const BookInfo = () => {
     return (
@@ -164,7 +164,7 @@ export default function PostUpload() {
 
   return (
     <>
-      <ModalBackground open={openModal} onClick={handleModalClose}>
+      <ModalBackground open={openModal}>
         {/* 이미지 클릭 시 모달 창 */}
         {openModal && (
           <UploadModal onClickHandler={handleModalClose}>

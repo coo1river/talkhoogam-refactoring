@@ -24,10 +24,6 @@ export default function ListFeed(accountname) {
   const loginName = useRecoilValue(accountName);
   const [postId, setPostId] = useState("");
 
-  // 별점 상태, 별점 array
-  const [onStar, setOnStar] = useState([false, false, false, false, false]);
-  const array = [0, 1, 2, 3, 4];
-
   useEffect(() => {
     const fetchData = async () => {
       try {

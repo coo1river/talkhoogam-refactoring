@@ -8,7 +8,6 @@ function PostUploadAPI({ inputValue, itemImage }) {
 
   const postUpload = async () => {
     const url = "https://api.mandarin.weniv.co.kr";
-    console.log("inputValue:", inputValue);
 
     try {
       const res = await fetch(`${url}/post`, {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { json, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import PostDetailAPI from "../../api/post/PostDetailAPI";
 import { LayoutStyle, LayoutInsideStyle } from "../../styles/LayoutStyled";

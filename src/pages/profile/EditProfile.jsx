@@ -24,7 +24,6 @@ import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
 import { useNavigate } from "react-router-dom";
 import accountname from "../../recoil/accountname";
 import BasicHeader from "../../components/header/BasicHeader";
-import { LayoutStyle } from "../../styles/LayoutStyled";
 import useValid from "../../hook/useValid";
 import loginToken from "../../recoil/loginToken";
 

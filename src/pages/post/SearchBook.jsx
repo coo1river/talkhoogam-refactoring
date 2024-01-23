@@ -5,7 +5,6 @@ import { LayoutStyle } from "../../styles/LayoutStyled";
 import { BackBtn, HeaderMain } from "../../styles/HeaderStyled";
 import iconArrow from "../../assets/icons/icon-arrow-left.svg";
 import SearchBookApi from "../../api/post/SearchBookApi";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { author, link, thumbnail, title } from "../../recoil/bookInfo";
 import Footer from "../../components/footer/Footer";
@@ -13,7 +12,6 @@ import Footer from "../../components/footer/Footer";
 export default function SearchBook() {
   const [bookData, setBookData] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const navigate = useNavigate();
 
   // 책 정보 저장
   const [bookTitle, setBookTitle] = useRecoilState(title);
