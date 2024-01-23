@@ -12,8 +12,7 @@ import CommonModal from "../../components/modal/CommonModal";
 import { useRecoilValue } from "recoil";
 import timeFormat from "../../utils/timeFormat.js";
 import LikeHeart from "../../components/common/LikeHeart";
-import { Rating } from "../post/PostUpload.jsx";
-import { FaStar } from "react-icons/fa";
+import Rating from "../../components/common/Rating.jsx";
 
 export default function ListFeed(accountname) {
   const navigate = useNavigate();
@@ -25,25 +24,12 @@ export default function ListFeed(accountname) {
   const loginName = useRecoilValue(accountName);
   const [postId, setPostId] = useState("");
 
-  // 별점 상태, 별점 array
-  const [onStar, setOnStar] = useState([false, false, false, false, false]);
-  const array = [0, 1, 2, 3, 4];
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const list = await getMyFeedListAPI();
         setMyFeedData(list);
         setLoading(true);
-
-        console.log(list);
-
-        // score 값을 이용하여 onStar 설정
-        let clickStates = [...onStar];
-        for (let i = 0; i < 5; i++) {
-          clickStates[i] = i < list.rating ? true : false;
-        }
-        setOnStar(clickStates);
       } catch (error) {
         console.error("데이터 가져오기 오류:", error);
         setLoading(false);
@@ -99,6 +85,7 @@ export default function ListFeed(accountname) {
           bookData.bookTitle = contentObj.bookTitle;
           bookData.bookAuthor = contentObj.bookAuthor;
           bookData.bookContent = contentObj.inputContent;
+          bookData.bookRating = contentObj.rating;
 
           return (
             <List key={item.id}>
@@ -125,17 +112,7 @@ export default function ListFeed(accountname) {
                 </MoreButton>
                 <strong className="book-title">{bookData.bookTitle}</strong>
                 <p className="book-author">{bookData.bookAuthor}</p>
-                <Rating>
-                  {array.map((el, idx) => {
-                    return (
-                      <FaStar
-                        key={idx}
-                        size="25"
-                        className={onStar[el] && "rating"}
-                      />
-                    );
-                  })}
-                </Rating>
+                <Rating rating={bookData.bookRating} />
                 <p className="list-text">{bookData.bookContent}</p>
                 <div className="list-icon">
                   <LikeHeart />
@@ -241,6 +218,9 @@ const List = styled.li`
   }
   .list-text {
     font-size: 14px;
+    height: 3.3rem;
+    white-space: pre-line;
+    overflow: hidden;
 
     @media screen and (min-width: 768px) {
       font-size: 16px;

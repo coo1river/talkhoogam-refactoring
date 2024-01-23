@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { json, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import PostDetailAPI from "../../api/post/PostDetailAPI";
 import { LayoutStyle, LayoutInsideStyle } from "../../styles/LayoutStyled";
@@ -212,6 +212,11 @@ export const PostDetailWrap = styled.div`
     width: 42px;
     height: 42px;
     cursor: pointer;
+
+    @media screen and (min-width: 768px) {
+      width: 45px;
+      height: 45px;
+    }
   }
 
   .user-contents {
@@ -252,11 +257,19 @@ export const PostDetailWrap = styled.div`
   .timeline-title {
     font-size: 15px;
     font-weight: bold;
+
+    @media screen and (min-width: 768px) {
+      font-size: 17px;
+    }
   }
 
   .timeline-id {
     color: #767676;
     font-size: 13px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 15px;
+    }
   }
 
   .timeline-main-text {
@@ -304,6 +317,10 @@ export const PostDetailWrap = styled.div`
     font-weight: 400;
     line-height: 12px;
     margin-top: 16px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 13px;
+    }
   }
 
   .social-wrap {

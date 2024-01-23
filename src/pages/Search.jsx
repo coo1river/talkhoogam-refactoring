@@ -57,7 +57,6 @@ export default function Search() {
     const setResult = async () => {
       if (searchResult) {
         setSearchData(await SearchApi(token, searchId));
-        console.log("검색됨");
       } else {
         setSearchData([]);
       }

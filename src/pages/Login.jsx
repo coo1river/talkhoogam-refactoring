@@ -60,14 +60,12 @@ export default function Login() {
       // api 호출
       const loginRes = await LoginApi(email, password);
       if (loginRes.status !== 422) {
-        console.log(loginRes);
         const newToken = loginRes.user.token;
         const newAccountname = loginRes.user.accountname;
         setToken(newToken);
         setIsLogin(true);
         setIsAccountname(newAccountname);
 
-        // localStorage.setItem("userToken", newToken);
         sessionStorage.setItem("userToken", newToken);
         navigate("/home");
       } else {

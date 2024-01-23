@@ -4,7 +4,6 @@ import { LayoutStyle, LayoutInsideStyle } from "../../styles/LayoutStyled";
 import UploadHeader from "../../components/header/UploadHeader";
 import PostModifyAPI from "../../api/post/PostModifyAPI";
 import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
-import IconUpload from "../../assets/icons/icon-upload.svg";
 import { validateImage } from "../../utils/imageValidate";
 import PostDetailAPI from "../../api/post/PostDetailAPI";
 import { useParams } from "react-router-dom";

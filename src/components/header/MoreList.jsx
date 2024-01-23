@@ -47,7 +47,6 @@ export default function MoreList({ setMoreOpen }) {
 
   // 로그아웃
   function funcLogout() {
-    console.log("되긴됨?");
     setIsLogin(false);
     setToken(null);
     setAccountName("");

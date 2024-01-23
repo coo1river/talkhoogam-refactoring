@@ -20,7 +20,6 @@ export default function ProductModify() {
   const [imgSrc, setImgSrc] = useState("");
   const [itemImage, setItemImage] = useState("");
   const textareaRef = useRef();
-  const [inputValue, setInputValue] = useState("");
 
   const { productModify } = ProductModifyAPI(productDetail, itemImage, id);
   const onClickHandler = async (e) => {
