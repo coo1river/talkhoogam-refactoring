@@ -284,8 +284,8 @@ const ContentWrap = styled.div`
 `;
 
 const SearchBook = styled.div`
-  width: 350px;
-  height: 200px;
+  width: 300px;
+  height: 180px;
   border-radius: 20px;
   background-color: var(--color-trans-grey);
   border: 2px solid #e7e7e7;

@@ -79,7 +79,7 @@ export const CommentForm = styled.form`
   font-weight: 400;
 
   @media screen and (max-width: 768px) {
-    width: 400px;
+    width: 320px;
   }
 
   .profile-img {
