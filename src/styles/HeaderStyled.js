@@ -4,7 +4,6 @@ import Btn from "../components/common/button/Button";
 
 export const HeaderMain = styled.header`
   width: 100%;
-  padding-right: 10px;
 
   background-color: white;
   box-sizing: border-box;
@@ -15,8 +14,13 @@ export const HeaderMain = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 10px;
 
   z-index: 400;
+
+  @media screen and (min-width: 768px) {
+    padding: 0;
+  }
 
   & .hidden {
     width: 32px;
@@ -52,6 +56,7 @@ export const HeaderMain = styled.header`
   & .searchInput {
     width: 100%;
     padding: 8px 35px;
+    margin: 0 10px;
     background-color: #f2f2f2;
     box-sizing: border-box;
     border-radius: 30px;
@@ -74,6 +79,7 @@ export const HomeHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 20px;
 
   & div {
     width: 24px;
@@ -85,21 +91,19 @@ export const HomeHeader = styled.div`
 `;
 
 export const BackBtn = styled.button`
-  width: 22px;
-  height: 22px;
-  margin: 0 10px;
+  width: 30px;
+  height: 24px;
+  margin-left: 10px;
 `;
 
 export const MenuBtn = styled.button`
-  width: 22px;
-  height: 22px;
-  margin-right: 10px;
+  width: 30px;
+  height: 30px;
 `;
 
 export const SearchBtn = styled.button`
   width: 24px;
   height: 24px;
-  margin: 0 10px;
 
   @media screen and (min-width: 768px) {
     display: none;

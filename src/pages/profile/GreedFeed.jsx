@@ -69,11 +69,11 @@ const Layer = styled.div`
   display: grid; // 재웅 그리드로 바꾸고 도망갑니다
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  margin: 16px;
+  margin: 0 16px;
   margin-bottom: 70px;
   padding-bottom: 10px;
   position: relative;
-  min-height: 300px;
+  min-height: 200px;
   place-items: center;
 
   box-sizing: border-box;

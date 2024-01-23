@@ -10,6 +10,8 @@ import { useParams } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import { Rating } from "./PostUpload";
 import { FaStar } from "react-icons/fa";
+import Loading from "../../components/loading/Loading";
+import { ClipLoader } from "react-spinners";
 
 export default function PostModify() {
   const [postDetail, setPostDetail] = useState(() => {});
@@ -151,7 +153,9 @@ export default function PostModify() {
                 </InputWrap>
               </>
             ) : (
-              <p>로딩 중 ..</p>
+              <Loading>
+                <ClipLoader color="#56b778" size={20} speedMultiplier={0.7} />
+              </Loading>
             )}
           </ContentWrap>
         </PositionWrap>

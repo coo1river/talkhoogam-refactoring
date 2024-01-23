@@ -5,7 +5,7 @@ export const MyProductWrap = styled.article`
   width: 100%;
   max-width: 390px;
   margin: 6px auto;
-  padding: 20px 12px 5px;
+  padding: 25px;
   position: relative;
 
   @media screen and (min-width: 768px) {

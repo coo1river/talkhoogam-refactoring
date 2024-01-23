@@ -276,9 +276,12 @@ export const FeedWrap = styled.div`
     font-size: 15px;
     line-height: normal;
     margin: 16px 0;
-    height: 3.8rem;
 
-    white-space: pre-line;
+    // 3줄 이상 시 말줄임표 처리
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     overflow: hidden;
 
     @media screen and (min-width: 768px) {

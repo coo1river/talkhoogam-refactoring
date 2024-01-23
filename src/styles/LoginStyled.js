@@ -5,11 +5,7 @@ import iconGoogle from "../assets/images/icon_google.png";
 import { Btn } from "../components/common/button/Button";
 
 export const LoginPage = styled.article`
-  @media screen and (max-width: 390px) {
-    min-width: 390px;
-  }
-
-  max-width: 500px;
+  max-width: 390px;
   height: 100vh;
   margin: 0 auto;
   padding: 20px;
@@ -19,8 +15,13 @@ export const LoginPage = styled.article`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   color: #767676;
+
+  @media screen and (min-width: 768px) {
+    max-width: 500px;
+  }
+
+  max-width: 500px;
 `;
 
 export const EmailLoginForm = styled.form`

@@ -28,10 +28,11 @@ export const LayoutInsideStyle = styled.div`
 
   box-sizing: border-box;
   margin: 20px 16px 50px 16px;
+  padding: 0 30px;
   /* 내부 콘텐츠가 높이가 작을 때  */
   /* height: 100%; */
   @media screen and (min-width: 390px) {
-    width: 390px;
+    width: 380px;
   }
 
   @media screen and (min-width: 768px) {
